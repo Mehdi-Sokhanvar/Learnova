@@ -1,0 +1,25 @@
+spring:
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tests
+    username: postgres
+    password: Maktab
+    driver-class-name: org.postgresql.Driver
+
+
+
+#  what is flyway
+  flyway:
+    community-db-support-enabled: true
+    logging:
+      level:
+        org:
+          flywaydb: DEBUG
