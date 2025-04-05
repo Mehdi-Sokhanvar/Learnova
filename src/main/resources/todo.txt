@@ -1,0 +1,75 @@
+
+
+FAZ 2
+
+1- User with teacher can see all courses teaches *
+2- User with teacher can see all exam courses teaches *
+3- edit* or create* or delete*
+
+
+از استاد توی ازمون استفاده بشه
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+todo:after search get all user and pending user
+
+ازمون برای یه درس هست
+
+create
+
+
+
+ostad can see any courses role is teacher after authrozation
+ostad can see exam of any course
+ostad can edit or delete exam
+exam(title , description , time  )
+
+======
+
+edit
+Question , BankQuestion , Descriptive Answer , MultiChooss Question
+به دو روش میشه سوال کرد ( سوال تشریحی و سوال چند گزینه )
+بانک سوالات هر استادی یه بانک سوال داره که میتونه از اون سوال برداره
+
+
+a
+ا ول  - ایا یه ازمون فقط یه نوع سوال داره ؟؟
+ایا مثلا ترکیبی از نوع سوال داشتیم
+
+
+سوال تشریحی
+
+متن برای صورت سوال
+مکانی برای پاسخگویی
+
+سوال تستی
+گزینه سوالات میتونه زیاد باشه
+تعداد گزینه های سوال مشخص نیس  و هیچ محدودیتی هم نداره
+جواب صحیح هم مشخص باشه
+
+
+سوال
+عنوان و یک فیلد اجباری
+تعیین نمره
+
+
+استاد علاوه بر اینکه میتونه یه سوال از بانک سوال برداره میتونه یه سوال هم اصافه بکنه
+
+بانک سوالات
+نمره و اینکه
+
+
+
+
+
