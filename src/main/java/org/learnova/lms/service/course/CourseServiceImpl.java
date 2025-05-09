@@ -69,10 +69,11 @@ public class CourseServiceImpl implements CourseService {
                         String.format(Messages.COURSE_NOT_FOUND_BY_THIS_ID, user.courseId())));
 
         switch (userFound.getRole().getName()) {
-            case "ROLE_TEACHER" -> {
-                courseFound.setTeacher((Teacher) userFound);
+            case "TEACHER" -> {
+                Teacher teacher=(Teacher) userFound;
+                courseFound.setTeacher(teacher);
             }
-            case "ROLE_STUDENT" -> {
+            case "STUDENT" -> {
                 Student student = (Student) userFound;
                 if (!courseFound.getStudentList().contains(student)) {
                     courseFound.getStudentList().add(student);
@@ -146,8 +147,6 @@ public class CourseServiceImpl implements CourseService {
                         String.format(Messages.COURSE_NOT_FOUND_BY_THIS_ID, courseId)));
         return course.getStudentList().stream()
                 .map(student -> new StudentResponse(
-                        student.getFirstName(),
-                        student.getLastName(),
                         student.getUserName(),
                         student.getEmail()
                 )).collect(Collectors.toList());
@@ -156,13 +155,13 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseResponseDTO> listOfUserCourses(AppUser userLogin) {
         List<Course> courses = null;
-        if (userLogin.getRole().getName().equals("ROLE_TEACHER")) {
+        if (userLogin.getRole().getName().equals("TEACHER")) {
 //            courses = courseRepository.findCourseByTeacherId(userLogin.getId());
             courses = teacherRepository.findById(userLogin.getId()).get().getCourseList();
             if (courses.isEmpty()) {
                 throw new TeacherNotAssignedThisCourse(String.format(Messages.TEACHER_NOT_ASSIGNED_IN_THIS_COURSE, userLogin));
             }
-        } else if (userLogin.getRole().getName().equals("ROLE_STUDENT")) {
+        } else if (userLogin.getRole().getName().equals("STUDENT")) {
             courses = studentRepository.findById(userLogin.getId()).get().getCourseList();
             if (courses.isEmpty()) {
                 throw new StudnetNotAssignedThisCourse(String.format(Messages.TEACHER_NOT_ASSIGNED_IN_THIS_COURSE, userLogin));

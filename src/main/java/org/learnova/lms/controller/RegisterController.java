@@ -1,8 +1,7 @@
 package org.learnova.lms.controller;
 
 import jakarta.validation.Valid;
-import org.learnova.lms.domain.user.Student;
-import org.learnova.lms.dto.request.ApiResponse;
+import org.learnova.lms.dto.ApiResponse;
 import org.learnova.lms.dto.request.RegisterDTO;
 import org.learnova.lms.service.register.RegisterService;
 import org.springframework.context.MessageSource;

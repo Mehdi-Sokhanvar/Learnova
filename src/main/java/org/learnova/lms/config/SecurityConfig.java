@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -18,14 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
     private static final String[] allowedPathsWithOutAuthentication = {"/api/register/**", "/api/auth/login"};
-    private static final String[] allowedManagerPath = {
-            "/manager/**",
-            "/api/v1/user/",
-            "/v3/api-docs/",
-            "/swagger-ui/",
-            "/swagger-ui.html",
-            "/api/v1/course/"}; //todo : why ok with api/v1/course/** and api/v1/user becuse PreAuthrize
-    private static final String[] teacherPathAllowed = {"/api/v1/questions","/api/v1/exam/"};
+    private static final String[] adminPathAllowed = {"/api/v1/courses/**"};
+    private static final String[] teacherPathAllowed = {"/api/v1/questions","/api/v1/exam/","/api/v1/user/courses"};
     private static final String[] studentPathAllowed = {};
     private final JwtAuthorizationFilter jwtAuthFilter;
 
@@ -38,13 +33,14 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authrize -> authrize
-                        .requestMatchers(allowedPathsWithOutAuthentication)
-                        .permitAll()
-                        .requestMatchers(allowedManagerPath).hasRole("MANAGER")
-                        .requestMatchers(studentPathAllowed).hasRole("STUDENT")
-                        .requestMatchers(teacherPathAllowed).hasRole("TEACHER")
-                        .anyRequest().authenticated()
-                ).addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                        .requestMatchers(allowedPathsWithOutAuthentication).permitAll()
+                        .requestMatchers(adminPathAllowed).hasAuthority("ADMIN")
+                        .requestMatchers(studentPathAllowed).hasAuthority("STUDENT")
+                        .requestMatchers(teacherPathAllowed).hasAuthority("TEACHER")
+
+                ).sessionManagement(sessionManagement ->
+                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

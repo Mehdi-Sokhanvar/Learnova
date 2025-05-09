@@ -24,6 +24,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new ExceptionResponse(ex.getMessage()), HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ExceptionResponse> handleBadCredentials(RuntimeException ex) {
+        return new ResponseEntity<>(new ExceptionResponse(ex.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+
     @ExceptionHandler(RoleNotFoundException.class)
     public ResponseEntity<ExceptionResponse> roleNotFoundExceptions(RoleNotFoundException e) {
         return new ResponseEntity<>(new ExceptionResponse(e.getMessage()), HttpStatus.NOT_FOUND);

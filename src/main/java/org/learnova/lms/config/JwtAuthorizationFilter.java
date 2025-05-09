@@ -35,7 +35,7 @@
                 try {
                     String username = jwtProvider.getUsername(token);
                     var userDetails = userDetailsService.loadUserByUsername(username);
-                    var auth = new UsernamePasswordAuthenticationToken(
+                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                             userDetails, null, userDetails.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(auth);
                 } catch (Exception ex) {

@@ -31,12 +31,12 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     public void registerStudent(RegisterDTO user) {
-        registerUser(user, "ROLE_STUDENT", Student::new);
+        registerUser(user, "STUDENT", Student::new);
     }
 
     @Override
     public void registerTeacher(RegisterDTO user) {
-        registerUser(user, "ROLE_TEACHER", Teacher::new);
+        registerUser(user, "TEACHER", Teacher::new);
     }
 
 
