@@ -1,4 +1,4 @@
-package org.learnova.lms.service.impl;
+package org.learnova.lms.service.login;
 
 import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.repository.user.UserRepository;
@@ -12,14 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
     public LoginServiceImpl(
-            UserRepository userRepository,
-            PasswordEncoder passwordEncoder
+            UserRepository userRepository
     ) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+
     }
 
 

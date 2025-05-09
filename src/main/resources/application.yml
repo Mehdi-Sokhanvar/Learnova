@@ -1,25 +1,28 @@
 spring:
   jpa:
-    database: postgresql
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
-  config:
-    activate:
-      on-profile: dev
+
+
+    #  config:
+#    activate:
+#      on-profile: dev
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/tests
+    url: jdbc:postgresql://localhost:5432/learnova
     username: postgres
     password: Maktab
     driver-class-name: org.postgresql.Driver
 
-
+jwt:
+  secret: 0bd42befe80dc3658fd786763a3e4edc556926f3ab981779dfd2cba83c851c14bb2f7ac2591406bfef2a4d4da3c794b9751fde9e541ee240e2325b9b39ee818966c040a5163a87e53be9e16a61b73f827d28a5ff9c5fbbe8d19ed18dbca0b1e3f3e16c5637e6d55fb740143f120dd03d215ab624a4eb780a5e320d9eb84dd4bf5ab3eeddd311126081e64464dcb1a64b2d7e3db3bc160add6cb80b73038610b42a7cbb6ddcc8e1d379c1fcf06ae6c2ea7fc55427aad66f038258ac1e925046680b7f70a326caac822078f229306b19294b8de86d2cc0875f0ba5b15e6f69220b6d8a6e8ef9f815b4e77e1ac1bd08e01e0ae9a910d84328e4fe0b201cf04585e6
+  expiration-ms: 3600000
 
 #  what is flyway
-  flyway:
-    community-db-support-enabled: true
-    logging:
-      level:
-        org:
-          flywaydb: DEBUG
+#  flyway:
+#    community-db-support-enabled: true
+#    logging:
+#      level:
+#        org:
+#          flywaydb: DEBUG
