@@ -1,39 +1,55 @@
 package org.learnova.lms.controller;
 
 import jakarta.validation.Valid;
+import org.learnova.lms.domain.user.Student;
+import org.learnova.lms.dto.request.ApiResponse;
 import org.learnova.lms.dto.request.RegisterDTO;
 import org.learnova.lms.service.register.RegisterService;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/**
- *  @author: this is mehdi
- */
+import java.util.Locale;
+
+
 @RestController
 @RequestMapping("/api/register")
 public class RegisterController {
 
 
     private final RegisterService registerService;
+    private final MessageSource messageSource;
 
-    public RegisterController(RegisterService registerService) {
+    public RegisterController(RegisterService registerService, MessageSource messageSource) {
         this.registerService = registerService;
+        this.messageSource = messageSource;
     }
 
-    @PostMapping("/teacher")
-    public ResponseEntity<?> registerStudent(@Valid
-                                             @RequestBody RegisterDTO user) {
-
+    @PostMapping("/students")
+    public ResponseEntity<ApiResponse> registerStudent(@Valid
+                                                       @RequestBody RegisterDTO user, Locale locale) {
         registerService.registerStudent(user);
-        return new ResponseEntity<>("TEACHER REGISTER SUCCESFULLY", HttpStatus.CREATED);
+        String msg = messageSource.getMessage(
+                "register.student.success",
+                null,
+                locale
+        );
+        ApiResponse body = new ApiResponse(true, msg);
+        return ResponseEntity.status(HttpStatus.CREATED).body(body);
     }
 
-    @PostMapping("/student")
-    public ResponseEntity<?> registerTeacher(@Valid
-                                             @RequestBody RegisterDTO user) {
+    @PostMapping("/teachers")
+    public ResponseEntity<ApiResponse> registerTeacher(@Valid
+                                                       @RequestBody RegisterDTO user, Locale locale) {
         registerService.registerTeacher(user);
-        return new ResponseEntity<>("STUDENT REGISTER SUCCESFULLY", HttpStatus.CREATED);
+        String msg = messageSource.getMessage(
+                "register.teacher.success",
+                null,
+                locale
+        );
+        ApiResponse body = new ApiResponse(true, msg);
+        return ResponseEntity.status(HttpStatus.CREATED).body(body);
     }
 
 

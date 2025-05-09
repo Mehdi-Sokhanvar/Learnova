@@ -19,6 +19,10 @@ public class GlobalExceptionHandler {
     @Autowired
     private MessageSource messageSource;
 
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ExceptionResponse> handleBadCredentials(BadCredentialsException ex) {
+        return new ResponseEntity<>(new ExceptionResponse(ex.getMessage()), HttpStatus.UNAUTHORIZED);
+    }
 
     @ExceptionHandler(RoleNotFoundException.class)
     public ResponseEntity<ExceptionResponse> roleNotFoundExceptions(RoleNotFoundException e) {

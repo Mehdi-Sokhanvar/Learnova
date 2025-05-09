@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoginServiceImpl implements UserDetailsService {
+public class LoginServiceImpl implements LoginService {
     private final UserRepository userRepository;
 
     public LoginServiceImpl(

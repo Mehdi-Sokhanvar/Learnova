@@ -17,8 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-    private static final String[] allowedPathsWithOutAuthentication = {"/api/register/**", "/login"};
+    private static final String[] allowedPathsWithOutAuthentication = {"/api/register/**", "/api/auth/login"};
     private static final String[] allowedManagerPath = {
             "/manager/**",
             "/api/v1/user/",
