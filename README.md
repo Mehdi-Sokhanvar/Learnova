@@ -36,7 +36,7 @@ Learnova is an innovative online examination platform that empowers educators to
 
 ## 🛠️ Technologies Used
 
-- **Backend:** Java 11, Spring Boot 3.4.3  
+- **Backend:** Java 17, Spring Boot 3.4.3  
 - **Frontend:** Thymeleaf, Bootstrap 5  
 - **Database:** PostgreSQL 17  
 - **Build Tool:** Maven 4.0.0  
