@@ -49,7 +49,7 @@ Learnova is an innovative online examination platform that empowers educators to
 ## 📬 Postman Collection
 You can import the Postman collection into Postman by using:
 
-[![Download Postman Collection](https://img.shields.io/badge/Postman-Download-orange?logo=postman)](./postman/MyProject.postman_collection.json)
+[![Download Postman Collection](https://img.shields.io/badge/Postman-Download-orange?logo=postman)](./postman/Learnova.postman_collection.json)
 
 
 
