@@ -45,13 +45,13 @@ Learnova is an innovative online examination platform that empowers educators to
 
 ---
 
-## 🌐 API Integration & Testing
-📤 API Collection
-We provide ready-to-use API collections for popular tools like Postman and Insomnia:
 
-Postman: Import the downloaded JSON file via Import → File
-Insomnia: Drag & drop the collection into your workspace
-Postman Collection
+## 📬 Postman Collection
+You can import the Postman collection into Postman by using:
+
+[![Download Postman Collection](https://img.shields.io/badge/Postman-Download-orange?logo=postman)](./postman/Learnova.postman_collection.json)
+
+
 
 ---
 
