@@ -5,21 +5,14 @@ import org.learnova.lms.domain.course.Course;
 import org.learnova.lms.dto.ApiResponse;
 import org.learnova.lms.dto.response.CourseCreatedResponseDTO;
 import org.learnova.lms.dto.response.SuccessResponse;
-import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.dto.request.CourseRequestDTO;
-
 import org.learnova.lms.dto.response.StudentResponse;
 import org.learnova.lms.dto.request.EnrollmentRoleForUser;
 import org.learnova.lms.service.course.CourseService;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.security.Principal;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;

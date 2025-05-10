@@ -97,32 +97,6 @@ public class ExamServiceImpl implements ExamService {
         );
 
         examRepository.save(newExam);
-//        courseRepository.findById(exam.courseId()).ifPresentOrElse(
-//                course -> {
-//                    if (course.getTeacher().getUserName().equals(user.getUserName())) {
-//                        if (LocalDate.parse(exam.date()).isAfter(course.getStartDate()) &&
-//                                LocalDate.parse(exam.date()).isBefore(course.getEndDate())) {
-//                            examRepository.save(
-//                                    new Exam(
-//                                            exam.title(),
-//                                            exam.description(),
-//                                            LocalDate.parse(exam.date()),
-//                                            LocalTime.parse(exam.startTime()),
-//                                            exam.duration(),
-//                                            ExamStatus.NotStarted,
-//                                            course));
-//                        } else {
-//                            throw new DataExamBetweenStartDateAndEndDateException(Messages.DATE_EXAM_BETWEEN_START_DATE_AND_END_DATE);
-//                        }
-//
-//                    } else {
-//                        throw new TeacherNotAssignedThisCourse(String.format(Messages.TEACHER_NOT_ASSIGNED_IN_THIS_COURSE, user.getId()));
-//                    }
-//                },
-//                () -> {
-//                    throw new CourseNotFoundException(String.format(Messages.COURSE_NOT_FOUND_BY_THIS_ID, exam.courseId()));
-//                }
-//        );
     }
 
 
@@ -334,24 +308,6 @@ public class ExamServiceImpl implements ExamService {
     public List<AllAnswersQuestionDTO> getAllAnswerQuestionStudent(Long examId, AppUser studentInExam, Locale locale) {
         ExamSession examSession = examSessionRepository.findByExam_IdAndStudent_Id(examId, studentInExam.getId()).orElseThrow(() ->
                 new ResourceAccessException(messageSource.getMessage("NotAccess", null, locale)));
-
-//        List<StudentAnswer> studentAnswers = examSession.getStudentAnswers();
-//        List<Long> questionOrder = examSession.getQuestionOrder();
-//        studentAnswers.sort(Comparator.comparingInt(a -> questionOrder.indexOf(a.getExamQuestion().getId())));
-//        return studentAnswers.stream().map(answer->{
-//            String answerText;
-//
-//            if (answer.getAnswer()==null || answer.getAnswer().trim().isEmpty()){
-//                answerText="THIS QUESTION HAS ANSWER";
-//            }else
-//                answerText=answer.getAnswer().trim();
-//
-//            return new AllAnswersQuestionDTO(
-//                    answer.getExamQuestion().getQuestion().getTitle(),
-//                    answerText
-//            );
-//        }).collect(Collectors.toList());
-
         Map<Long, String> answeredQuestions = examSession.getStudentAnswers().stream()
                 .collect(Collectors.toMap(
                         answer -> answer.getExamQuestion().getQuestion().getId(),
@@ -370,16 +326,8 @@ public class ExamServiceImpl implements ExamService {
                 })
                 .collect(Collectors.toList());
 
-    }//todo : cheack this and write better when user has no answer for question just null return
+    }
 
-    //.map(
-//            answer ->
-//    {
-//        new AllAnswersQuestionDTO(
-//                answer.getExamQuestion().getQuestion().getTitle(),
-//                answer.getAnswer();
-//    }
-//                ).collect(Collectors.toList());/*?????*/
     @Override
     public void submitSessionExam(Long sessionId, AppUser studentInExam, Locale locale) {
         ExamSession session = validateExamSession(sessionId, studentInExam, locale);

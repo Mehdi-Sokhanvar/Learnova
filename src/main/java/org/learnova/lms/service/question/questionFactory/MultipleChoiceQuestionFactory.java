@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class MultipleChoiceQuestionFactory implements QuestionFactory {
@@ -26,7 +27,7 @@ public class MultipleChoiceQuestionFactory implements QuestionFactory {
         question.setTitle(questionDTO.getTitle());
         question.setDescription(questionDTO.getDescription());
         question.setDefaultScore(questionDTO.getDefaultScore());
-        question.setIdentifier(questionDTO.getIdentifier());
+        question.setIdentifier(UUID.randomUUID().toString());
         question.setLevel(questionDTO.getLevel());
         question.setCategory(new Category(dto.getCategory()));
 
@@ -55,7 +56,7 @@ public class MultipleChoiceQuestionFactory implements QuestionFactory {
         multipleOptionQuestion.setTitle(multipleChoiceRequestDTO.getTitle());
         multipleOptionQuestion.setDescription(multipleChoiceRequestDTO.getDescription());
         multipleOptionQuestion.setDefaultScore(multipleChoiceRequestDTO.getDefaultScore());
-        multipleOptionQuestion.setIdentifier(multipleChoiceRequestDTO.getIdentifier());
+        multipleOptionQuestion.setIdentifier(UUID.randomUUID().toString());
         multipleOptionQuestion.setLevel(multipleChoiceRequestDTO.getLevel());
         multipleOptionQuestion.setCategory(new Category(dto.getCategory()));
         for (AnswerOptionDTO answerOptionDTO : multipleChoiceRequestDTO.getOptions()) {

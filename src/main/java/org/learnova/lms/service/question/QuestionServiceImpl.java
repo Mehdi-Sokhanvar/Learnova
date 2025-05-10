@@ -63,49 +63,6 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
 
-//    @Override
-//    public void addQuestionToExam(Teacher teacher, QuestionRequestDto requestDto) {
-//        Course course = courseRepository.findById(requestDto.getCourseId())
-//                .orElseThrow(() -> new CourseNotFoundException(
-//                        String.format(Messages.COURSE_NOT_FOUND_BY_THIS_ID, requestDto.getCourseId())));
-//        validateTeacherAssignment(teacher, course);
-//        Exam examFound = course.getExamList()
-//                .stream()
-//                .filter(exam -> exam.getId().equals(requestDto.getExamId()))
-//                .findFirst()
-//                .orElseThrow(() -> new ExamNotFoundException("Exam Not Found Exception")
-//                );
-//        if (examFound.getStatus() != ExamStatus.InProgress
-//                || examFound.getStatus() != ExamStatus.Completed) {
-//            Question questionFound = course.getQuestions()
-//                    .stream()
-//                    .filter(question -> question.getId().equals(requestDto.getQuestionId()))
-//                    .findFirst()
-//                    .orElseThrow(() -> new QuestionNotFoundException("QUESTION NOT FOUND"));
-//            if (!questionFound.getDeleted()) {
-
-//                boolean questionExists = examFound.getExamQuestions().stream()
-//                        .anyMatch(examQuestion -> examQuestion.getQuestion().getId().equals(requestDto.getQuestionId()));
-//                if (questionExists) {
-//                    throw new QuestionAlreadyExistInExam("Question already exists in the exam");
-//                }
-//                Double currentTotalScore = examFound.getExamQuestions().stream()
-//                        .mapToDouble(ExamQuestion::getScore)
-//                        .sum();
-//
-//                Double newScore = currentTotalScore + requestDto.getScore();
-//                if (newScore > examFound.getMark()) {
-//                    throw new InvalidScoreException("Total exam score cannot exceed 100");
-//                }
-//                examQuestionRepository.save(new ExamQuestion(examFound, questionFound, requestDto.getScore()));
-//            } else {
-//                throw new QuestionDeletedException("Question deleted");
-//            }
-//        } else {
-//            throw new ExamNotAddQuestionException("Cann't Add Question To exam when question in process or completes");
-//        }
-//
-//    }
 
     public void addQuestionToExam(Teacher teacher, QuestionRequestDto requestDto) {
         Course course = getValidatedCourse(requestDto.getCourseId());

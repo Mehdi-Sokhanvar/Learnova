@@ -10,6 +10,8 @@ import org.learnova.lms.dto.request.QuestionDTO;
 import org.learnova.lms.dto.QuestionResponseDTO;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class EssayQuestionFactory implements QuestionFactory {
     @Override
@@ -19,7 +21,7 @@ public class EssayQuestionFactory implements QuestionFactory {
         question.setTitle(questionDTO.getTitle());
         question.setDescription(questionDTO.getDescription());
         question.setDefaultScore(questionDTO.getDefaultScore());
-        question.setIdentifier(questionDTO.getIdentifier());
+        question.setIdentifier(UUID.randomUUID().toString());
         question.setLevel(questionDTO.getLevel());
         question.setCategory(new Category(dto.getCategory()));
         question.setAnswer(questionDTO.getAnswer());
@@ -41,7 +43,7 @@ public class EssayQuestionFactory implements QuestionFactory {
         essayQuestion.setTitle(essayDTO.getTitle());
         essayQuestion.setDescription(essayDTO.getDescription());
         essayQuestion.setDefaultScore(essayDTO.getDefaultScore());
-        essayQuestion.setIdentifier(essayDTO.getIdentifier());
+        essayQuestion.setIdentifier(UUID.randomUUID().toString());
         essayQuestion.setLevel(essayDTO.getLevel());
         essayQuestion.setCategory(new Category(dto.getCategory()));
         essayQuestion.setAnswer(essayDTO.getAnswer());

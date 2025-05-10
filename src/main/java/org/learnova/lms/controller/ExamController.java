@@ -1,5 +1,6 @@
 package org.learnova.lms.controller;
 
+import jakarta.validation.Valid;
 import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.domain.user.Teacher;
 import org.learnova.lms.dto.*;
@@ -8,11 +9,13 @@ import org.learnova.lms.dto.response.ExamResponseDTO;
 import org.learnova.lms.service.exam.ExamService;
 import org.learnova.lms.service.login.CustomUserDetails;
 import org.learnova.lms.util.Messages;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -24,46 +27,55 @@ import java.util.Locale;
 public class ExamController {
 
     private final ExamService examService;
+    private final MessageSource messageSource;
 
-    public ExamController(ExamService examService) {
+    public ExamController(ExamService examService, MessageSource messageSource) {
         this.examService = examService;
+        this.messageSource = messageSource;
     }
 
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
-    @PostMapping("/add")
-    public ResponseEntity<?> addExam(@RequestBody ExamRequestDTO exam, Principal principal) {
-        CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+    @PreAuthorize("hasRole('TEACHER')")
+    @PostMapping
+    public ResponseEntity<ApiResponse> addExam(@RequestBody @Valid ExamRequestDTO exam
+            , Authentication authentication, Locale locale) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         Teacher teacher = (Teacher) userDetails.getUser();
         examService.addExam(teacher, exam);
-        return new ResponseEntity<>(Messages.ADD_EXAM_SUCCESSFULLY, HttpStatus.OK);
+        String message = messageSource.getMessage("exam.add.success", null, locale);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse(true, message));
     }
 
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
-    @PutMapping("/{id}/edit")
-    public ResponseEntity<?> editExam(@PathVariable Long id, @RequestBody ExamRequestDTO exam, Principal principal) {
-        AppUser teacher = getUser((UsernamePasswordAuthenticationToken) principal);
+    @PreAuthorize("hasRole('TEACHER')")
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse> editExam(@PathVariable Long id, @RequestBody ExamRequestDTO exam,
+                                                Authentication authentication, Locale locale) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        AppUser teacher = userDetails.getUser();
         examService.updateExam(teacher, id, exam);
-        return new ResponseEntity<>(String.format(Messages.EXAM_UPDATE_SUCCESFULLY, id), HttpStatus.OK);
+
+        String message = messageSource.getMessage("exam.update.success", new Object[]{id}, locale);
+        return ResponseEntity.ok(new ApiResponse(true, message));
     }
 
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @PreAuthorize("hasRole('TEACHER')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteExam(@PathVariable Long id, Principal principal) {
-        AppUser teacher = getUser((UsernamePasswordAuthenticationToken) principal);
+    public ResponseEntity<ApiResponse> deleteExam(@PathVariable Long id, Authentication authentication, Locale locale) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        AppUser teacher = userDetails.getUser();
         examService.deleteExam(id, teacher.getId());
-        return new ResponseEntity<>(String.format(Messages.DELETE_EXAM_SUCCESFULLY, id), HttpStatus.OK);
+        String message = messageSource.getMessage("exam.delete.success", null, locale);
+        return ResponseEntity.ok(new ApiResponse(true, message));
     }
 
 
-    @PreAuthorize("hasAnyRole('ROLE_TEACHER','ROLE_STUDENT')")
+    @PreAuthorize("hasAnyRole('TEACHER','STUDENT')")
     @GetMapping("/{id}/all")
     public ResponseEntity<List<ExamResponseDTO>> getAllExams(@PathVariable Long id, Principal principal) {
         AppUser user = getUser((UsernamePasswordAuthenticationToken) principal);
         return new ResponseEntity<>(examService.examListInCourse(id, user), HttpStatus.OK);
     }
 
-
-    @PreAuthorize("hasRole('ROLE_STUDENT')")
+    @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/{examId}/start")
     public ResponseEntity<ExamSessionResponseDTO> startExam(@PathVariable("examId") Long examId, Principal principal, Locale locale) {
         AppUser user = getUser((UsernamePasswordAuthenticationToken) principal);
@@ -72,69 +84,72 @@ public class ExamController {
 
 
     @GetMapping("/exam-sessions/{sessionId}/current")
-    @PreAuthorize("hasRole('ROLE_STUDENT')")
-    public ResponseEntity<QuestionResponseDTO> getCurrentQuestion(@PathVariable Long sessionId,Principal principal,Locale locale){
-        AppUser studentInExam=getUser((UsernamePasswordAuthenticationToken) principal);
-        return new ResponseEntity<>(examService.getCurrentQuestion(sessionId,studentInExam,locale),HttpStatus.OK);
+    @PreAuthorize("hasRole('STUDENT')")
+    public ResponseEntity<QuestionResponseDTO> getCurrentQuestion(@PathVariable Long sessionId, Principal principal, Locale locale) {
+        AppUser studentInExam = getUser((UsernamePasswordAuthenticationToken) principal);
+        return new ResponseEntity<>(examService.getCurrentQuestion(sessionId, studentInExam, locale), HttpStatus.OK);
     }
 
+
+    @PreAuthorize("hasRole('STUDENT')")
     @PostMapping("/exam-sessions/{sessionId}/navigate")
-    @PreAuthorize("hasRole('ROLE_STUDENT')")
-    public void navigateQuestion(@PathVariable Long sessionId,@RequestParam String direction, Principal principal,Locale locale){
-        AppUser studentInExam=getUser((UsernamePasswordAuthenticationToken) principal);
-        examService.changeCurrentQuestion(sessionId,direction,studentInExam,locale);
+    public void navigateQuestion(@PathVariable Long sessionId, @RequestParam String direction, Principal principal, Locale locale) {
+        AppUser studentInExam = getUser((UsernamePasswordAuthenticationToken) principal);
+        examService.changeCurrentQuestion(sessionId, direction, studentInExam, locale);
     }
 
+    @PreAuthorize("hasRole('STUDENT')")
     @PostMapping("/exam-sessions/{sessionId}/answers")
-    @PreAuthorize("hasRole('ROLE_STUDENT')")
-    public void saveAnswer(@PathVariable Long sessionId, @RequestBody AnswerDTO answer, Principal principal, Locale locale){
-        AppUser studentInExam=getUser((UsernamePasswordAuthenticationToken) principal);
-        examService.saveAnswerStudent(sessionId,answer,studentInExam,locale);
+    public void saveAnswer(@PathVariable Long sessionId, @RequestBody AnswerDTO answer, Principal principal, Locale locale) {
+        AppUser studentInExam = getUser((UsernamePasswordAuthenticationToken) principal);
+        examService.saveAnswerStudent(sessionId, answer, studentInExam, locale);
     }
 
+    @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/exam-session/{examId}/all/answers")
-    @PreAuthorize("hasRole('ROLE_STUDENT')")
-    public ResponseEntity<List<AllAnswersQuestionDTO>> AllQuestionAnswerStudent(@PathVariable Long examId, Principal principal,Locale locale){
-        AppUser studentInExam=getUser((UsernamePasswordAuthenticationToken) principal);
-        return new ResponseEntity<>(examService.getAllAnswerQuestionStudent(examId,studentInExam,locale),HttpStatus.OK);
-    }//todo : writie better this code
+    public ResponseEntity<List<AllAnswersQuestionDTO>> AllQuestionAnswerStudent(@PathVariable Long examId, Principal principal, Locale locale) {
+        AppUser studentInExam = getUser((UsernamePasswordAuthenticationToken) principal);
+        return new ResponseEntity<>(examService.getAllAnswerQuestionStudent(examId, studentInExam, locale), HttpStatus.OK);
+    }
 
 
+    @PreAuthorize("hasRole('STUDENT')")
     @PostMapping("/exam-sessions/{sessionId}/submit")
-    @PreAuthorize("hasRole('ROLE_STUDENT')")
-    public void submitExam(@PathVariable Long sessionId, Principal principal,Locale locale){
-        AppUser studentInExam=getUser((UsernamePasswordAuthenticationToken) principal);
-        examService.submitSessionExam(sessionId,studentInExam,locale);
+    public void submitExam(@PathVariable Long sessionId, Principal principal, Locale locale) {
+        AppUser studentInExam = getUser((UsernamePasswordAuthenticationToken) principal);
+        examService.submitSessionExam(sessionId, studentInExam, locale);
     }
 
-
+    @PreAuthorize("hasRole('{TEACHER,ADMIN}')")
     @PostMapping("/detail/{examId}/report")
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
-    public ResponseEntity<TeacherReportAsStudent> detailStudentExamInfo(@PathVariable Long examId,@RequestParam("studentId") Long studentId, Principal principal,Locale locale){
-        AppUser teacher=getUser((UsernamePasswordAuthenticationToken) principal);
+    public ResponseEntity<TeacherReportAsStudent> detailStudentExamInfo(@PathVariable Long examId, @RequestParam("studentId") Long studentId, Principal principal, Locale locale) {
+        AppUser teacher = getUser((UsernamePasswordAuthenticationToken) principal);
 
-        return new ResponseEntity<>(  examService.getAllDetailReportAsStudent(examId,studentId,teacher,locale),HttpStatus.OK);
+        return new ResponseEntity<>(examService.getAllDetailReportAsStudent(examId, studentId, teacher, locale), HttpStatus.OK);
     }
 
+
+    @PreAuthorize("hasRole('{TEACHER,ADMIN}')")
     @GetMapping("/continue/{examId}")
-    public ResponseEntity<ExamSessionResponseDTO> detailSessionStudent(@PathVariable Long examId, Principal principal,Locale locale){
-        AppUser student=getUser((UsernamePasswordAuthenticationToken) principal);
-        return new ResponseEntity<>(examService.continueExam(examId,student,locale),HttpStatus.OK);
+    public ResponseEntity<ExamSessionResponseDTO> detailSessionStudent(@PathVariable Long examId, Principal principal, Locale locale) {
+        AppUser student = getUser((UsernamePasswordAuthenticationToken) principal);
+        return new ResponseEntity<>(examService.continueExam(examId, student, locale), HttpStatus.OK);
     }
 
-
+    @PreAuthorize("hasRole('{TEACHER,ADMIN}')")
     @PostMapping("/essayQuestion/{examId}")
-    public void assignScoreToEssayQuestion(@PathVariable Long examId,@RequestBody assignScoreDTO requestDTO
-            ,Principal principal,Locale locale){
-        AppUser student=getUser((UsernamePasswordAuthenticationToken) principal);
-        examService.assignScoreToEssayQuestion(examId,requestDTO,locale);
+    public void assignScoreToEssayQuestion(@PathVariable Long examId, @RequestBody assignScoreDTO requestDTO
+            , Principal principal, Locale locale) {
+        AppUser student = getUser((UsernamePasswordAuthenticationToken) principal);
+        examService.assignScoreToEssayQuestion(examId, requestDTO, locale);
     }
 
+    @PreAuthorize("hasRole('{TEACHER,ADMIN}')")
     @GetMapping("{examId}/report")
     public ResponseEntity<List<ReportDTO>> reportExam(@PathVariable Long examId
-            ,Principal principal,Locale locale){
-        AppUser teacher=getUser((UsernamePasswordAuthenticationToken) principal);
-        return new ResponseEntity<>(examService.getReport(examId,teacher),HttpStatus.OK);
+            , Principal principal, Locale locale) {
+        AppUser teacher = getUser((UsernamePasswordAuthenticationToken) principal);
+        return new ResponseEntity<>(examService.getReport(examId, teacher), HttpStatus.OK);
     }
 
     private static AppUser getUser(UsernamePasswordAuthenticationToken principal) {

@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private static final String[] allowedPathsWithOutAuthentication = {"/api/register/**", "/api/auth/login"};
     private static final String[] adminPathAllowed = {"/api/v1/courses/**"};
-    private static final String[] teacherPathAllowed = {"/api/v1/questions","/api/v1/exam/","/api/v1/user/courses"};
+    private static final String[] teacherPathAllowed = {"/api/v1/questions/**","/api/v1/user/courses"};
     private static final String[] studentPathAllowed = {};
     private final JwtAuthorizationFilter jwtAuthFilter;
 
@@ -37,6 +37,7 @@ public class SecurityConfig {
                         .requestMatchers(adminPathAllowed).hasAuthority("ADMIN")
                         .requestMatchers(studentPathAllowed).hasAuthority("STUDENT")
                         .requestMatchers(teacherPathAllowed).hasAuthority("TEACHER")
+                        .anyRequest().authenticated()
 
                 ).sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

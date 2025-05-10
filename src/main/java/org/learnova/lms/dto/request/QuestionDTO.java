@@ -29,7 +29,6 @@ public class QuestionDTO {
 
     private String title;
     private String description;
-    private String identifier;
     private Double defaultScore;
     private QuestionLevel level;
     private String category;
@@ -69,13 +68,6 @@ public class QuestionDTO {
         this.description = description;
     }
 
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
 
     public Double getDefaultScore() {
         return defaultScore;

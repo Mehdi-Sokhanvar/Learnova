@@ -12,6 +12,8 @@ import org.learnova.lms.dto.TrueFalseResponseDTO;
 import org.learnova.lms.dto.request.*;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 
 @Component
 public class TrueFalseQuestionFactory implements QuestionFactory {
@@ -22,7 +24,7 @@ public class TrueFalseQuestionFactory implements QuestionFactory {
         question.setTitle(questionDTO.getTitle());
         question.setDescription(questionDTO.getDescription());
         question.setDefaultScore(questionDTO.getDefaultScore());
-        question.setIdentifier(questionDTO.getIdentifier());
+        question.setIdentifier(UUID.randomUUID().toString());
         question.setLevel(questionDTO.getLevel());
         question.setCategory(new Category(dto.getCategory()));
         question.setCorrect(questionDTO.getIsCorrect());
@@ -43,7 +45,7 @@ public class TrueFalseQuestionFactory implements QuestionFactory {
         trueFalseQuestion.setTitle(trueFalseDTO.getTitle());
         trueFalseQuestion.setDescription(trueFalseDTO.getDescription());
         trueFalseQuestion.setDefaultScore(trueFalseDTO.getDefaultScore());
-        trueFalseQuestion.setIdentifier(trueFalseDTO.getIdentifier());
+        trueFalseQuestion.setIdentifier(UUID.randomUUID().toString());
         trueFalseQuestion.setLevel(trueFalseDTO.getLevel());
         trueFalseQuestion.setCategory(new Category(dto.getCategory()));
         trueFalseQuestion.setCorrect(trueFalseDTO.getIsCorrect());
