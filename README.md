@@ -68,7 +68,11 @@ We welcome contributions! Here's how:
 ## 🐛 Issue Tracking
 📌 Report bugs or suggest features via GitHub Issues
 
-📄 License
-Distributed under the MIT License. See LICENSE file for more information.
+---
+
+## 📄 License
+This project is licensed under the MIT License – see the LICENSE.txt file for details.
+
+You are free to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of this software, as long as you include the original copyright and license.
 
 Connect with us:
