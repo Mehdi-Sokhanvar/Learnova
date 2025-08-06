@@ -23,20 +23,7 @@ public class SecurityConfig {
     private static final String[] teacherPathAllowed = {"/api/v1/questions/**","/api/v1/user/courses"};
     private static final String[] studentPathAllowed = {};
     private final JwtAuthorizationFilter jwtAuthFilter;
-//   http
-//           .csrf(AbstractHttpConfigurer::disable)
-//            .authorizeHttpRequests(authrize -> authrize
-//            .requestMatchers(allowedPathsWithOutAuthentication).permitAll()
-//                        .requestMatchers(adminPathAllowed).hasAuthority("ADMIN")
-//                        .requestMatchers(studentPathAllowed).hasAuthority("STUDENT")
-//                        .requestMatchers(teacherPathAllowed).hasAuthority("TEACHER")
-//                        .anyRequest().authenticated()
-//
-//                ).sessionManagement(sessionManagement ->
-//            sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-//
-//        return http.build();
+
     public SecurityConfig(JwtAuthorizationFilter jwtAuthFilter) {
         this.jwtAuthFilter = jwtAuthFilter;
     }
