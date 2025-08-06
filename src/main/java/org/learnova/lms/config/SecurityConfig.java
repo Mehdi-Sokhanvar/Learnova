@@ -38,7 +38,6 @@ public class SecurityConfig {
                         .requestMatchers(studentPathAllowed).hasAuthority("STUDENT")
                         .requestMatchers(teacherPathAllowed).hasAuthority("TEACHER")
                         .anyRequest().authenticated()
-
                 ).sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
