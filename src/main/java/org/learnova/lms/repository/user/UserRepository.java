@@ -22,4 +22,3 @@ public interface UserRepository extends JpaRepository<AppUser, Long> {
 
 }
 
-//todo » کاربرد این انوتیسشن ها جی

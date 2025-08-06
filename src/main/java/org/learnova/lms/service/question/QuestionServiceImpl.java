@@ -10,7 +10,7 @@ import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.domain.user.Teacher;
 import org.learnova.lms.dto.request.QuestionDTO;
 import org.learnova.lms.dto.request.QuestionRequestDto;
-import org.learnova.lms.dto.QuestionResponseDTO;
+import org.learnova.lms.dto.response.QuestionResponseDTO;
 import org.learnova.lms.exception.*;
 import org.learnova.lms.repository.course.CourseRepository;
 import org.learnova.lms.repository.exam.ExamRepository;
@@ -147,7 +147,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void deleteQuestionFromExam(Teacher teacher, Long questionId, Long examId) {
-        //todo : check teacher is teacher in course or no
         ExamQuestion courseNotFound = examQuestionRepository.findByQuestionAndExam(questionId, examId).orElseThrow(() ->
                 new CourseNotFoundException("Course Not Found"));
         examQuestionRepository.delete(courseNotFound);

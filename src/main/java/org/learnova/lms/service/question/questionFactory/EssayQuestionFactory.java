@@ -4,10 +4,10 @@ import org.learnova.lms.domain.enums.QType;
 import org.learnova.lms.domain.question.Category;
 import org.learnova.lms.domain.question.Question;
 import org.learnova.lms.domain.question.type_question.EssayQuestion;
-import org.learnova.lms.dto.EssayResponseDTO;
+import org.learnova.lms.dto.response.EssayResponseDTO;
 import org.learnova.lms.dto.request.EssayRequestDTO;
 import org.learnova.lms.dto.request.QuestionDTO;
-import org.learnova.lms.dto.QuestionResponseDTO;
+import org.learnova.lms.dto.response.QuestionResponseDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;

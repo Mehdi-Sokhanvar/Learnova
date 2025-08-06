@@ -1,4 +1,4 @@
-package org.learnova.lms.dto;
+package org.learnova.lms.dto.request;
 
 import org.learnova.lms.domain.enums.ExamStatus;
 

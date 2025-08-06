@@ -2,7 +2,7 @@ package org.learnova.lms.controller;
 
 import jakarta.validation.Valid;
 import org.learnova.lms.domain.course.Course;
-import org.learnova.lms.dto.ApiResponse;
+import org.learnova.lms.dto.response.ApiResponse;
 import org.learnova.lms.dto.response.CourseCreatedResponseDTO;
 import org.learnova.lms.dto.response.SuccessResponse;
 import org.learnova.lms.dto.request.CourseRequestDTO;

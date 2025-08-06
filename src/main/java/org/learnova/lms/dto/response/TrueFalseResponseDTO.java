@@ -1,4 +1,4 @@
-package org.learnova.lms.dto;
+package org.learnova.lms.dto.response;
 
 public class TrueFalseResponseDTO extends QuestionResponseDTO{
 }

@@ -5,12 +5,10 @@ import org.learnova.lms.domain.enums.QType;
 import org.learnova.lms.domain.question.Category;
 import org.learnova.lms.domain.question.Question;
 import org.learnova.lms.domain.question.type_question.AnswerOption;
-import org.learnova.lms.domain.question.type_question.EssayQuestion;
 import org.learnova.lms.domain.question.type_question.MultipleOptionQuestion;
-import org.learnova.lms.domain.question.type_question.TrueFalseQuestion;
-import org.learnova.lms.dto.MultipleChoiceResponseDTO;
-import org.learnova.lms.dto.OptionResponseDTO;
-import org.learnova.lms.dto.QuestionResponseDTO;
+import org.learnova.lms.dto.response.MultipleChoiceResponseDTO;
+import org.learnova.lms.dto.response.OptionResponseDTO;
+import org.learnova.lms.dto.response.QuestionResponseDTO;
 import org.learnova.lms.dto.request.*;
 import org.springframework.stereotype.Component;
 

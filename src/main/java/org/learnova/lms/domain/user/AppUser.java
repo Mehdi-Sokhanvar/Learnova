@@ -15,7 +15,6 @@ import java.util.Objects;
         @Index(name = "idx_user_username", columnList = "userName")
 })
 
-//todo : why use better use index
 public class AppUser extends BaseEntity<Long> {
 
 

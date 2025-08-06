@@ -48,8 +48,6 @@ public class RegisterServiceImpl implements RegisterService {
         userRepository.save(newUser);
     }
 
-    //todo: is it true line 47
-
     private void isEmailExist(String email) {
        if (userRepository.existsByEmail(email)) {
            throw new UserExistInDataBase(Messages.EMAIL_EXIST);

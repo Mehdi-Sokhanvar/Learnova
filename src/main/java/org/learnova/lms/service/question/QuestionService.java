@@ -1,9 +1,8 @@
 package org.learnova.lms.service.question;
 
-import org.learnova.lms.domain.course.Course;
 import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.domain.user.Teacher;
-import org.learnova.lms.dto.QuestionResponseDTO;
+import org.learnova.lms.dto.response.QuestionResponseDTO;
 import org.learnova.lms.dto.request.QuestionDTO;
 import org.learnova.lms.dto.request.QuestionRequestDto;
 

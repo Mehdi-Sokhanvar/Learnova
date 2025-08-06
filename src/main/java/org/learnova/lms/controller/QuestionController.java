@@ -1,10 +1,9 @@
 package org.learnova.lms.controller;
 
-import org.learnova.lms.domain.question.Question;
 import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.domain.user.Teacher;
-import org.learnova.lms.dto.ApiResponse;
-import org.learnova.lms.dto.QuestionResponseDTO;
+import org.learnova.lms.dto.response.ApiResponse;
+import org.learnova.lms.dto.response.QuestionResponseDTO;
 import org.learnova.lms.dto.request.QuestionDTO;
 import org.learnova.lms.dto.request.QuestionRequestDto;
 import org.learnova.lms.service.login.CustomUserDetails;

@@ -19,4 +19,3 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
 }
 
-//todo : کلاسها و ایترفیس هایی که به ما اضافه میکنه

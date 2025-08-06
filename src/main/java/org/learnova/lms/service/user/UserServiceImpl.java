@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//todo : اگر روی اینترفیس بزاریم خوذش تسهصی میده
+
 @Service
 public class UserServiceImpl implements UserService {
 

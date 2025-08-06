@@ -86,7 +86,6 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.save(courseFound);
         userRepository.save(userFound);
 
-        //todo : writing better this code
     }
 
     @Override

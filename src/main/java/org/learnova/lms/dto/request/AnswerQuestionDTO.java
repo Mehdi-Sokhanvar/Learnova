@@ -1,4 +1,4 @@
-package org.learnova.lms.dto;
+package org.learnova.lms.dto.request;
 
 public record AnswerQuestionDTO(
         String question,

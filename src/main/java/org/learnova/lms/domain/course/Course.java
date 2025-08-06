@@ -20,12 +20,11 @@ import java.util.UUID;
 })
 public class Course extends BaseEntity<Long> {
 
-    //todo : how to use high performance for queyr
 
     private String title;
 
     private String description;
-    //todo: what is uuid
+
     private UUID uniqueId = UUID.randomUUID();
 
     private LocalDate startDate;
@@ -44,7 +43,7 @@ public class Course extends BaseEntity<Long> {
 
 
     @OneToMany(mappedBy = "course")
-    private List<Question>  questions;
+    private List<Question> questions;
 
 
     public List<Question> getQuestions() {
@@ -128,15 +127,9 @@ public class Course extends BaseEntity<Long> {
     }
 
 
-
     public void setExamList(List<Exam> examList) {
         this.examList = examList;
     }
 
-    //    public Course(@NotEmpty(message = "name Course has some error  ") @NotBlank(message = "name Of Course is empty") String name, String description, LocalDate startDate, LocalDate endDate, UUID uuid) {
-//        super();
-//    }
 }
-//todo : what is localdata and time in java
-//    todo: what is uuid
-// todo :embedble and emvbeede
+

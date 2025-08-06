@@ -2,15 +2,13 @@ package org.learnova.lms.service.login;
 
 import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.repository.user.UserRepository;
-import org.learnova.lms.service.login.CustomUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoginServiceImpl implements LoginService {
+public class LoginServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
 
     public LoginServiceImpl(

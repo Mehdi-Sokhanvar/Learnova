@@ -22,7 +22,6 @@ public class Student extends AppUser{
     )
     private List<Course> courseList=new ArrayList<>();
 
-
     @OneToMany(mappedBy = "student")
     private List<ExamSession> examSessions;
 
@@ -32,16 +31,10 @@ public class Student extends AppUser{
     }
 
 
-    public Student() {
-
-    }
+    public Student() {}
 
 
     public List<Course> getCourseList() {
         return courseList;
     }
 }
-//read documnt of chat pg
-
-//todo : think a bout this sysntax
-//todo : وقتی جدول های شما چندین رابطخ داشته باشه و شما  توی برنماه تون mapped بای نزاری چدل اضافه میزاره

@@ -71,10 +71,6 @@ public class ExamSession extends BaseEntity<Long> {
         this.questionOrder = questionOrder;
     }
 
-    public void setStudentAnswers(List<StudentAnswer> studentAnswers) {
-        this.studentAnswers = studentAnswers;
-    }
-
     public void setCurrentQuestion(Integer currentQuestion) {
         this.currentQuestion = currentQuestion;
     }

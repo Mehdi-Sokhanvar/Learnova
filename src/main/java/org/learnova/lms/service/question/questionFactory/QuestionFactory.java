@@ -2,7 +2,7 @@ package org.learnova.lms.service.question.questionFactory;
 
 import org.learnova.lms.domain.question.Question;
 import org.learnova.lms.dto.request.QuestionDTO;
-import org.learnova.lms.dto.QuestionResponseDTO;
+import org.learnova.lms.dto.response.QuestionResponseDTO;
 
 public interface QuestionFactory {
 

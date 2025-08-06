@@ -1,4 +1,4 @@
-package org.learnova.lms.config;
+package org.learnova.lms.config.i18n;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;

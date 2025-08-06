@@ -2,9 +2,11 @@ package org.learnova.lms.service.exam;
 
 import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.domain.user.Teacher;
-import org.learnova.lms.dto.*;
-import org.learnova.lms.dto.request.ExamRequestDTO;
+import org.learnova.lms.dto.request.*;
 import org.learnova.lms.dto.response.ExamResponseDTO;
+import org.learnova.lms.dto.response.ExamSessionResponseDTO;
+import org.learnova.lms.dto.response.QuestionResponseDTO;
+import org.learnova.lms.dto.response.ReportDTO;
 
 import java.util.List;
 import java.util.Locale;
@@ -29,7 +31,7 @@ public interface ExamService {
 
     void saveAnswerStudent(Long sessionId, AnswerDTO answer, AppUser studentInExam, Locale locale);
 
-    List<AllAnswersQuestionDTO> getAllAnswerQuestionStudent(Long sessionId, AppUser studentInExam,Locale locale);
+    List<AllAnswersQuestionDTO> getAllAnswerQuestionStudent(Long sessionId, AppUser studentInExam, Locale locale);
 
     void submitSessionExam(Long sessionId, AppUser studentInExam,Locale locale);
 
@@ -37,7 +39,7 @@ public interface ExamService {
 
     ExamSessionResponseDTO continueExam(Long examId, AppUser student, Locale locale);
 
-    void assignScoreToEssayQuestion(Long examId, assignScoreDTO requestDTO,Locale locale);
+    void assignScoreToEssayQuestion(Long examId, assignScoreDTO requestDTO, Locale locale);
 
     List<ReportDTO> getReport(Long examId, AppUser teacher);
 }

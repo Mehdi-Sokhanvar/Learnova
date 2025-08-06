@@ -1,4 +1,4 @@
-package org.learnova.lms.dto;
+package org.learnova.lms.dto.response;
 
 public record ApiResponse (
      boolean success,

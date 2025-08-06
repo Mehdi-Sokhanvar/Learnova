@@ -1,11 +1,8 @@
-package org.learnova.lms.dto;
+package org.learnova.lms.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.learnova.lms.domain.enums.QuestionLevel;
-import org.learnova.lms.dto.request.EssayRequestDTO;
-import org.learnova.lms.dto.request.MultipleChoiceRequestDTO;
-import org.learnova.lms.dto.request.TrueFalseRequestDTO;
 
 @JsonTypeInfo(
         use=JsonTypeInfo.Id.NAME,
