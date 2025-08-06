@@ -6,12 +6,10 @@ import org.learnova.lms.dto.response.CourseResponseDTO;
 import org.learnova.lms.dto.response.SuccessResponse;
 import org.learnova.lms.dto.response.UserResponseDTO;
 import org.learnova.lms.service.course.CourseService;
-import org.learnova.lms.service.login.CustomUserDetails;
 import org.learnova.lms.service.user.UserService;
 import org.learnova.lms.util.Messages;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +27,6 @@ public class UserController {
         this.userService = userService;
         this.courseService = courseService;
     }
-
-
 
     @GetMapping("/all")
     public ResponseEntity<List<UserResponseDTO>> allUsers() {
@@ -62,9 +58,9 @@ public class UserController {
 
     @GetMapping("/courses")
     public ResponseEntity<List<CourseResponseDTO>> listTeacherCourses(Principal principal) {
-        CustomUserDetails userDetails = (CustomUserDetails)
+        AppUser userDetails = (AppUser)
                 ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
-        AppUser user = userDetails.getUser();
+        AppUser user = userDetails;
         return new ResponseEntity<>(courseService.listOfUserCourses(user), HttpStatus.OK);
     }
 

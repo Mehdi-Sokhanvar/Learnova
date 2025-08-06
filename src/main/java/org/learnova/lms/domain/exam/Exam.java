@@ -1,13 +1,14 @@
 package org.learnova.lms.domain.exam;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
 import org.learnova.lms.domain.course.Course;
 import org.learnova.lms.domain.user.Teacher;
 import org.learnova.lms.domain.base.BaseEntity;
 import org.learnova.lms.domain.enums.ExamStatus;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;

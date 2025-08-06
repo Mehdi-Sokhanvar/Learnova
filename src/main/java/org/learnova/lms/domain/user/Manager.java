@@ -1,9 +1,10 @@
 package org.learnova.lms.domain.user;
 
-import jakarta.persistence.Entity;
+
 import org.springframework.security.core.GrantedAuthority;
 
 
+import javax.persistence.Entity;
 import java.util.Collection;
 
 @Entity

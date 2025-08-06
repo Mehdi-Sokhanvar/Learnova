@@ -1,14 +1,11 @@
 package org.learnova.lms.controller;
 
-import jakarta.validation.Valid;
 import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.domain.user.Teacher;
 import org.learnova.lms.dto.*;
 import org.learnova.lms.dto.request.ExamRequestDTO;
 import org.learnova.lms.dto.response.ExamResponseDTO;
 import org.learnova.lms.service.exam.ExamService;
-import org.learnova.lms.service.login.CustomUserDetails;
-import org.learnova.lms.util.Messages;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import java.util.Locale;
@@ -38,8 +36,8 @@ public class ExamController {
     @PostMapping
     public ResponseEntity<ApiResponse> addExam(@RequestBody @Valid ExamRequestDTO exam
             , Authentication authentication, Locale locale) {
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        Teacher teacher = (Teacher) userDetails.getUser();
+        AppUser userDetails = (AppUser) authentication.getPrincipal();
+        Teacher teacher = (Teacher) userDetails;
         examService.addExam(teacher, exam);
         String message = messageSource.getMessage("exam.add.success", null, locale);
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse(true, message));
@@ -49,8 +47,8 @@ public class ExamController {
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> editExam(@PathVariable Long id, @RequestBody ExamRequestDTO exam,
                                                 Authentication authentication, Locale locale) {
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        AppUser teacher = userDetails.getUser();
+        AppUser userDetails = (AppUser) authentication.getPrincipal();
+        Teacher teacher = (Teacher) userDetails;
         examService.updateExam(teacher, id, exam);
 
         String message = messageSource.getMessage("exam.update.success", new Object[]{id}, locale);
@@ -60,8 +58,8 @@ public class ExamController {
     @PreAuthorize("hasRole('TEACHER')")
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deleteExam(@PathVariable Long id, Authentication authentication, Locale locale) {
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        AppUser teacher = userDetails.getUser();
+        AppUser userDetails = (AppUser) authentication.getPrincipal();
+        Teacher teacher = (Teacher) userDetails;
         examService.deleteExam(id, teacher.getId());
         String message = messageSource.getMessage("exam.delete.success", null, locale);
         return ResponseEntity.ok(new ApiResponse(true, message));
@@ -153,8 +151,8 @@ public class ExamController {
     }
 
     private static AppUser getUser(UsernamePasswordAuthenticationToken principal) {
-        CustomUserDetails userDetails = (CustomUserDetails) principal.getPrincipal();
-        AppUser user = userDetails.getUser();
+        AppUser userDetails = (AppUser) principal.getPrincipal();
+        AppUser user = userDetails;
         return user;
     }
 }

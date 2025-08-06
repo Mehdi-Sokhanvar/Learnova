@@ -9,14 +9,14 @@ spring:
 #    activate:
 #      on-profile: dev
 
-  datasource:
-    url: jdbc:postgresql://localhost:5432/learnova
-    username: postgres
-    password: Maktab
-    driver-class-name: org.postgresql.Driver
+#    datasource:
+#      url: jdbc:postgresql://localhost:5432/learnova
+#      username: postgres
+#      password: Maktab
+#      driver-class-name: org.postgresql.Driver
 
 jwt:
-  secret: {secret Key}
+  secret: 96884e17e443c7c004f366c9e4ae767ba77c8bf091603f87ef91856ac6808d80e8d1ed94a45d9cd411d41fb7cbd1031cb2ce58740899d0f4
   expiration-ms: 3600000
 
 #  what is flyway
@@ -26,3 +26,16 @@ jwt:
 #      level:
 #        org:
 #          flywaydb: DEBUG
+
+
+
+  datasource:
+    url: jdbc:h2:mem:learnova
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ''
+
+    h2:
+      console:
+        enable : true
+        path: /h2-console

@@ -1,7 +1,6 @@
 package org.learnova.lms.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import org.learnova.lms.domain.enums.Status;
 
 public record UserRequestDTO(

@@ -1,7 +1,8 @@
 package org.learnova.lms.service.register;
 
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import org.learnova.lms.dto.request.RegisterDTO;
 
 public interface RegisterService {

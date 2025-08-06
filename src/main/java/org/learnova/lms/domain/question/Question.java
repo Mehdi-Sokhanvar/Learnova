@@ -1,7 +1,7 @@
 package org.learnova.lms.domain.question;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Positive;
+
+
 import org.learnova.lms.domain.base.BaseEntity;
 import org.learnova.lms.domain.course.Course;
 import org.learnova.lms.domain.enums.QType;
@@ -9,6 +9,8 @@ import org.learnova.lms.domain.enums.QuestionLevel;
 import org.learnova.lms.domain.exam.ExamQuestion;
 import org.learnova.lms.domain.user.Teacher;
 
+import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @Entity

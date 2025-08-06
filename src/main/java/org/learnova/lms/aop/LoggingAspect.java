@@ -25,7 +25,6 @@ public class LoggingAspect {
         String signature = joinPoint.getSignature().toShortString();
         log.info("▶ Entering  {}", signature);
         long start = System.currentTimeMillis();
-
         try {
             Object result = joinPoint.proceed();
             long timeTaken = System.currentTimeMillis() - start;

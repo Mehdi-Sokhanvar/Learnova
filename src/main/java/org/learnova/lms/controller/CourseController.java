@@ -1,6 +1,6 @@
 package org.learnova.lms.controller;
 
-import jakarta.validation.Valid;
+
 import org.learnova.lms.domain.course.Course;
 import org.learnova.lms.dto.ApiResponse;
 import org.learnova.lms.dto.response.CourseCreatedResponseDTO;
@@ -13,6 +13,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;

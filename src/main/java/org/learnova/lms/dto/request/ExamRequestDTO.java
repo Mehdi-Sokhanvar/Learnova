@@ -1,7 +1,6 @@
 package org.learnova.lms.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

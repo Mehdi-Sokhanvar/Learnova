@@ -1,9 +1,10 @@
 package org.learnova.lms.domain.question.type_question;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 import org.learnova.lms.domain.base.BaseEntity;
 import org.learnova.lms.domain.question.Question;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class AnswerOption extends BaseEntity<Long> {

@@ -1,7 +1,9 @@
 package org.learnova.lms.domain.question.type_question;
 
-import jakarta.persistence.Entity;
+
 import org.learnova.lms.domain.question.Question;
+
+import javax.persistence.Entity;
 
 
 @Entity

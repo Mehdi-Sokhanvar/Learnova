@@ -1,11 +1,10 @@
 package org.learnova.lms.domain.user;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotBlank;
 import org.learnova.lms.domain.base.BaseEntity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity

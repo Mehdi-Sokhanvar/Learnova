@@ -1,6 +1,6 @@
 package org.learnova.lms.service.course;
 
-import jakarta.transaction.Transactional;
+
 import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.domain.course.Course;
 import org.learnova.lms.domain.user.Student;
@@ -19,6 +19,7 @@ import org.learnova.lms.repository.user.UserRepository;
 import org.learnova.lms.util.Messages;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;

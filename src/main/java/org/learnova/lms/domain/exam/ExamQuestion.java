@@ -1,9 +1,11 @@
 package org.learnova.lms.domain.exam;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+
 import org.learnova.lms.domain.base.BaseEntity;
 import org.learnova.lms.domain.question.Question;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class ExamQuestion extends BaseEntity<Long> {

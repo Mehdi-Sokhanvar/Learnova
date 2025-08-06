@@ -1,6 +1,6 @@
 package org.learnova.lms.domain.user;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Embeddable;
 
 @Embeddable
 public class Address {

@@ -1,11 +1,18 @@
 package org.learnova.lms.domain.user;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+
 import org.learnova.lms.domain.base.BaseEntity;
 import org.learnova.lms.domain.enums.Status;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +23,7 @@ import java.util.Objects;
 })
 
 //todo : why use better use index
-public class AppUser extends BaseEntity<Long> {
+public class AppUser extends BaseEntity<Long> implements UserDetails {
 
 
     @NotBlank
@@ -103,9 +110,40 @@ public class AppUser extends BaseEntity<Long> {
         return userName;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority(getRole().getName()));
+    }
+
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public String getUsername() {
+        return getUserName();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 
     public String getEmail() {
         return email;

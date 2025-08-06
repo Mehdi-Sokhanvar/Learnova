@@ -1,13 +1,16 @@
 package org.learnova.lms.domain.exam;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.persistence.*;
 import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 import org.learnova.lms.domain.base.BaseEntity;
 import org.learnova.lms.domain.enums.ExamStatus;
 import org.learnova.lms.domain.user.Student;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.time.Instant;
 import java.util.List;
 

@@ -18,12 +18,25 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private static final String[] allowedPathsWithOutAuthentication = {"/api/register/**", "/api/auth/login"};
+    private static final String[] allowedPathsWithOutAuthentication = {"/api/register/**", "/api/auth/login","/h2-console/**"};
     private static final String[] adminPathAllowed = {"/api/v1/courses/**"};
     private static final String[] teacherPathAllowed = {"/api/v1/questions/**","/api/v1/user/courses"};
     private static final String[] studentPathAllowed = {};
     private final JwtAuthorizationFilter jwtAuthFilter;
-
+//   http
+//           .csrf(AbstractHttpConfigurer::disable)
+//            .authorizeHttpRequests(authrize -> authrize
+//            .requestMatchers(allowedPathsWithOutAuthentication).permitAll()
+//                        .requestMatchers(adminPathAllowed).hasAuthority("ADMIN")
+//                        .requestMatchers(studentPathAllowed).hasAuthority("STUDENT")
+//                        .requestMatchers(teacherPathAllowed).hasAuthority("TEACHER")
+//                        .anyRequest().authenticated()
+//
+//                ).sessionManagement(sessionManagement ->
+//            sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+//
+//        return http.build();
     public SecurityConfig(JwtAuthorizationFilter jwtAuthFilter) {
         this.jwtAuthFilter = jwtAuthFilter;
     }
@@ -31,19 +44,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authrize -> authrize
-                        .requestMatchers(allowedPathsWithOutAuthentication).permitAll()
-                        .requestMatchers(adminPathAllowed).hasAuthority("ADMIN")
-                        .requestMatchers(studentPathAllowed).hasAuthority("STUDENT")
-                        .requestMatchers(teacherPathAllowed).hasAuthority("TEACHER")
-                        .anyRequest().authenticated()
-
-                ).sessionManagement(sessionManagement ->
-                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers(allowedPathsWithOutAuthentication).permitAll()
+                .antMatchers(adminPathAllowed).hasRole("ADMIN")
+                .antMatchers(teacherPathAllowed).hasRole("TEACHER")
+                .antMatchers(studentPathAllowed).hasAuthority("STUDENT")
+                .anyRequest().authenticated()
+                .and()
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
+
+
     }
 
     @Bean

@@ -1,10 +1,11 @@
 package org.learnova.lms.domain.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+
 import org.learnova.lms.domain.course.Course;
 import org.learnova.lms.domain.question.Question;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity

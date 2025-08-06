@@ -1,12 +1,13 @@
 package org.learnova.lms.domain.course;
 
-import jakarta.persistence.*;
+
 import org.learnova.lms.domain.exam.Exam;
 import org.learnova.lms.domain.base.BaseEntity;
 import org.learnova.lms.domain.question.Question;
 import org.learnova.lms.domain.user.Student;
 import org.learnova.lms.domain.user.Teacher;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.UUID;
         @Index(name = "idx_course_start_date", columnList = "startDate"),
         @Index(name = "idx_course_end_date", columnList = "endDate")
 })
+
 public class Course extends BaseEntity<Long> {
 
     //todo : how to use high performance for queyr

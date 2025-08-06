@@ -1,6 +1,7 @@
 package org.learnova.lms.dto.request;
 
-import jakarta.validation.constraints.*;
+
+import javax.validation.constraints.*;
 
 public record RegisterDTO(
         @NotNull

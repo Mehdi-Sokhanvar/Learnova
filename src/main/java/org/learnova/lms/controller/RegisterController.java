@@ -1,6 +1,5 @@
 package org.learnova.lms.controller;
 
-import jakarta.validation.Valid;
 import org.learnova.lms.dto.ApiResponse;
 import org.learnova.lms.dto.request.RegisterDTO;
 import org.learnova.lms.service.register.RegisterService;
@@ -9,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.validation.Valid;
 import java.util.Locale;
 
 

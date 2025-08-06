@@ -1,9 +1,10 @@
 package org.learnova.lms.domain.user;
 
-import jakarta.persistence.*;
+
 import org.learnova.lms.domain.course.Course;
 import org.learnova.lms.domain.exam.ExamSession;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 

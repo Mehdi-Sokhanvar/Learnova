@@ -1,8 +1,10 @@
 package org.learnova.lms.domain.question;
 
 
-import jakarta.persistence.Entity;
+
 import org.learnova.lms.domain.base.BaseEntity;
+
+import javax.persistence.Entity;
 
 @Entity
 public class Category extends BaseEntity<Long> {

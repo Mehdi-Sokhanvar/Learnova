@@ -1,9 +1,11 @@
 package org.learnova.lms.domain.question.type_question;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.validation.constraints.NotNull;
+
 import org.learnova.lms.domain.question.Question;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class EssayQuestion  extends Question {

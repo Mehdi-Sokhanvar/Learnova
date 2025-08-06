@@ -1,4 +1,4 @@
-package org.learnova.lms;
+package org.learnova.lms.util;
 
 import org.learnova.lms.domain.user.Role;
 
@@ -22,6 +22,8 @@ public class DataLoader implements CommandLineRunner {
             roleRepository.save(new Role("TEACHER"));
             roleRepository.save(new Role("ADMIN"));
         }
+
+
     }
 
 
