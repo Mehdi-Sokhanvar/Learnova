@@ -1,7 +1,9 @@
 package org.learnova.lms.controller;
 
 import jakarta.validation.Valid;
-import org.learnova.lms.config.jwt.JwtTokenProvider;
+
+import org.learnova.lms.config.jwt.JwtService;
+import org.learnova.lms.dto.response.AuthenticationResponse;
 import org.learnova.lms.dto.response.LoginResponse;
 import org.learnova.lms.dto.request.LoginDTO;
 
@@ -22,21 +24,28 @@ public class LoginController {
 
     private final UserDetailsService loginService;
     private final AuthenticationManager authenticationManager;
-    private final  JwtTokenProvider jwtTokenProvider;
+    private final JwtService jwtService;
 
-    public LoginController(UserDetailsService loginService, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+    public LoginController(UserDetailsService loginService, AuthenticationManager authenticationManager, JwtService jwtService) {
         this.loginService = loginService;
         this.authenticationManager = authenticationManager;
-        this.jwtTokenProvider = jwtTokenProvider;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginDTO loginDTO) {
-        var auth = new UsernamePasswordAuthenticationToken(loginDTO.username(), loginDTO.password());
-        Authentication authenticate = authenticationManager.authenticate(auth);
-        loginService.loadUserByUsername(loginDTO.username());
-        CustomUserDetails userDetails = (CustomUserDetails) authenticate.getPrincipal();
-        String token = jwtTokenProvider.generateToken(userDetails);
-        return ResponseEntity.ok(new LoginResponse(token));
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody @Valid LoginDTO loginDTO) {
+        this.authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginDTO.username(),
+                        loginDTO.password()
+                )
+        );
+        final String accessToken = jwtService.generateAccessToken(loginDTO.username());
+        final String refreshToken = jwtService.generateRefreshToken(loginDTO.username());
+        final String tokenType = "Bearer";
+        return ResponseEntity.ok(new AuthenticationResponse.Builder(accessToken)
+                .refreshToken(refreshToken)
+                .tokenType(tokenType)
+                .build());
     }
 }

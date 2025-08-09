@@ -16,10 +16,10 @@ import java.io.IOException;
 @Component
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
-    private final JwtTokenProvider jwtProvider;
+    private final JwtService jwtProvider;
     private final LoginServiceImpl userDetailsService;
 
-    public JwtAuthorizationFilter(JwtTokenProvider jwtProvider, LoginServiceImpl userDetailsService) {
+    public JwtAuthorizationFilter(JwtService jwtProvider, LoginServiceImpl userDetailsService) {
         this.jwtProvider = jwtProvider;
         this.userDetailsService = userDetailsService;
     }
@@ -32,8 +32,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
             try {
-                String username = jwtProvider.getUserName(token);
-                var userDetails = userDetailsService.loadUserByUsername(username);
+                String username = jwtProvider.extractUsername(token);
+                    var userDetails = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(auth);
