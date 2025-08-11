@@ -32,7 +32,7 @@ public class ExamController {
         this.messageSource = messageSource;
     }
 
-    @PreAuthorize("hasRole('TEACHER')")
+
     @PostMapping
     public ResponseEntity<ApiResponse> addExam(@RequestBody @Valid ExamRequestDTO exam
             , Authentication authentication, Locale locale) {
@@ -43,7 +43,7 @@ public class ExamController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse(true, message));
     }
 
-    @PreAuthorize("hasRole('TEACHER')")
+
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> editExam(@PathVariable Long id, @RequestBody ExamRequestDTO exam,
                                                 Authentication authentication, Locale locale) {
@@ -55,7 +55,7 @@ public class ExamController {
         return ResponseEntity.ok(new ApiResponse(true, message));
     }
 
-    @PreAuthorize("hasRole('TEACHER')")
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deleteExam(@PathVariable Long id, Authentication authentication, Locale locale) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();

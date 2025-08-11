@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -32,18 +31,18 @@ public class JwtService {
         this.publicKey = KeyUtils.loadPublicKey("keys/public.pem");
     }
 
-    public String generateAccessToken(final String username) {
+    public String generateAccessToken(final String username, String role)  {
         final Map<String, Object> claims = Map.of(TOKEN_TYPE, "ACCESS_TOKEN");
-        return buildToken(username, claims, this.accessTokenExpiration);
+        return buildToken(username, claims, this.accessTokenExpiration,role);
     }
 
-    public String generateRefreshToken(final String username) {
+    public String generateRefreshToken(final String username, String role) {
         final Map<String, Object> claims = Map.of(TOKEN_TYPE, "REFRESH_TOKEN");
-        return buildToken(username, claims, this.refreshTokenExpiration);
+        return buildToken(username, claims, this.refreshTokenExpiration,role);
     }
 
 
-    public String buildToken(final String username, final Map<String, Object> claims, final long expiration) {
+    public String buildToken(final String username, final Map<String, Object> claims, final long expiration,String role) {
         try {
             JwtClaims ta = new JwtClaims();
             ta.setSubject(username);
@@ -51,6 +50,7 @@ public class JwtService {
             ta.setIssuedAtToNow();
             ta.setIssuer("Learn ova.com");
             ta.setClaim(claims.keySet().iterator().next(), claims);
+            ta.setClaim("role", role);
             JsonWebSignature jws = new JsonWebSignature();
             jws.setPayload(ta.toJson());
             jws.setAlgorithmHeaderValue(AlgorithmIdentifiers.RSA_USING_SHA256);

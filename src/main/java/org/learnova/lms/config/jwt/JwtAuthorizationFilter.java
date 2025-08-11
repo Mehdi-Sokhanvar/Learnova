@@ -36,7 +36,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                     var userDetails = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                  SecurityContextHolder.getContext().setAuthentication(auth);
             } catch (Exception ex) {
                 SecurityContextHolder.clearContext();
                 res.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());

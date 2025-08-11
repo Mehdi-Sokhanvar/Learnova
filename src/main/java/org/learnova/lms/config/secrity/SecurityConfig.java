@@ -18,9 +18,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private static final String[] allowedPathsWithOutAuthentication = {"/api/register/**", "/api/auth/login"};
-    private static final String[] adminPathAllowed = {"/api/v1/courses/**"};
-    private static final String[] teacherPathAllowed = {"/api/v1/questions/**","/api/v1/user/courses"};
+    private static final String[] allowedPathsWithOutAuthentication = {"/h2-console/**","/api/register/**", "/api/auth/login/**"};
+    private static final String[] adminPathAllowed = {};
+    private static final String[] teacherPathAllowed = {"/api/v1/questions/**","/api/v1/user/courses","/api/v1/exam/**"};
     private static final String[] studentPathAllowed = {};
     private final JwtAuthorizationFilter jwtAuthFilter;
 
@@ -31,6 +31,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/h2-console/**")
+                )
+                .headers(headers -> headers
+                        .frameOptions(frame -> frame.sameOrigin())
+                )
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authrize -> authrize
                         .requestMatchers(allowedPathsWithOutAuthentication).permitAll()

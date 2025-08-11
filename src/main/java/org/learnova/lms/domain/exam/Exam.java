@@ -48,7 +48,7 @@ public class Exam extends BaseEntity<Long> {
     @ManyToOne
     private Course course;
 
-    @OneToOne
+    @ManyToOne
     private Teacher teacher;
 
     private String examTimeZone;

@@ -50,13 +50,15 @@ public class AppUser extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)
     private Status status=Status.PENDING;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="role_id")
     private Role role;
 
     public AppUser() {
 
     }
+
+
 
     public void setUserName(String userName) {
         this.userName = userName;

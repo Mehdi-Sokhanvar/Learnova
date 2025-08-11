@@ -41,6 +41,7 @@ public class AuthenticationResponse {
             return this;
         }
 
+
         public AuthenticationResponse build() {
             return new AuthenticationResponse(this);
         }

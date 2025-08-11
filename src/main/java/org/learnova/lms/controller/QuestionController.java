@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -34,7 +35,7 @@ public class QuestionController {
     }
 
 
-    @PreAuthorize("hasRole('TEACHER')")
+
     @PostMapping
     public ResponseEntity<ApiResponse> createQuestion(@RequestBody QuestionDTO dto, Principal principal, Locale locale) {
         CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
@@ -45,7 +46,7 @@ public class QuestionController {
     }
 
 
-    @PreAuthorize("hasRole('TEACHER')")
+
     @PostMapping("/add/exam")
     public ResponseEntity<ApiResponse> addQuestionTOCourse(@RequestBody QuestionRequestDto dto, Principal principal, Locale locale) {
         CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
@@ -56,7 +57,7 @@ public class QuestionController {
     }
 
 
-    @PreAuthorize("hasRole('TEACHER')")
+
     @DeleteMapping("/{questionId}")
     public ResponseEntity<ApiResponse> deleteQuestion(@PathVariable Long questionId, Principal principal, Locale locale) {
         CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
@@ -66,7 +67,7 @@ public class QuestionController {
         return ResponseEntity.ok(new ApiResponse(true, message));
     }
 
-    @PreAuthorize("hasRole('TEACHER')")
+
     @DeleteMapping("/{questionId}/exam/{examId}")
     public ResponseEntity<ApiResponse> deleteQuestionFromExam(@PathVariable Long questionId, @PathVariable Long examId, Principal principal, Locale locale) {
         CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
@@ -76,7 +77,7 @@ public class QuestionController {
         return ResponseEntity.ok(new ApiResponse(true, message));
     }
 
-    @PreAuthorize("hasRole('TEACHER')")
+
     @GetMapping("/{examId}/exam")
     public ResponseEntity<List<QuestionResponseDTO>> getExamQuestions(@PathVariable Long examId, Principal principal) {
         CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
@@ -85,7 +86,7 @@ public class QuestionController {
     }
 
 
-    @PreAuthorize("hasRole('TEACHER')")
+
     @GetMapping("/teacher")
     public ResponseEntity<List<QuestionResponseDTO>> getTeacherQuestion(Principal principal) {
         CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();

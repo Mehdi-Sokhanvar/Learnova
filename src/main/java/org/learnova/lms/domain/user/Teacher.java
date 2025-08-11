@@ -8,7 +8,8 @@ import org.learnova.lms.domain.question.Question;
 import java.util.List;
 
 @Entity
-public class Teacher extends AppUser{
+public class
+Teacher extends AppUser{
 
     @OneToMany(mappedBy = "teacher")
     private List<Course> courseList;

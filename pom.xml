@@ -77,13 +77,6 @@
         </dependency>
 
 
-        <!--        <dependency>-->
-<!--            <groupId>org.flywaydb</groupId>-->
-<!--            <artifactId>flyway-core</artifactId>-->
-<!--            <version>9.22.3</version> &lt;!&ndash; یا نسخهی جدیدتر &ndash;&gt;-->
-<!--        </dependency>-->
-
-
 
     </dependencies>
 
