@@ -22,12 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class LoginController {
 
-    private final UserDetailsService loginService;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
-    public LoginController(UserDetailsService loginService, AuthenticationManager authenticationManager, JwtService jwtService) {
-        this.loginService = loginService;
+    public LoginController(AuthenticationManager authenticationManager, JwtService jwtService) {
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
     }
@@ -46,6 +44,6 @@ public class LoginController {
         return ResponseEntity.ok(new AuthenticationResponse.Builder(accessToken)
                 .refreshToken(refreshToken)
                 .tokenType(tokenType)
-                .build());
+                    .build());
     }
 }
