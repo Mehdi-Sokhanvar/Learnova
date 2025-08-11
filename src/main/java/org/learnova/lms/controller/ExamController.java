@@ -73,7 +73,7 @@ public class ExamController {
         return new ResponseEntity<>(examService.examListInCourse(id, user), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('STUDENT')")
+    @PreAuthorize("hasAuthority('STUDENT')")
     @GetMapping("/{examId}/start")
     public ResponseEntity<ExamSessionResponseDTO> startExam(@PathVariable("examId") Long examId, Principal principal, Locale locale) {
         AppUser user = getUser((UsernamePasswordAuthenticationToken) principal);

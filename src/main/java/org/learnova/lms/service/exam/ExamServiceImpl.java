@@ -186,7 +186,8 @@ public class ExamServiceImpl implements ExamService {
 
         Optional<ExamSession> existingSession =
                 examSessionRepository.findByExam_IdAndStudent_IdAndStatus(examId, studentId, ExamStatus.InProgress);
-        existingSession.ifPresent(examSession -> new ExamSessionResponseDTO(
+        existingSession.ifPresent(examSession ->
+                new ExamSessionResponseDTO(
                 studentId,
                 examId,
                 now,

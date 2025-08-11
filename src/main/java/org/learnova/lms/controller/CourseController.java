@@ -12,6 +12,7 @@ import org.learnova.lms.service.course.CourseService;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Locale;
@@ -30,6 +31,7 @@ public class CourseController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<CourseCreatedResponseDTO>addCourse(@Valid @RequestBody CourseRequestDTO course,
                                                              Locale locale) {

@@ -21,7 +21,7 @@ public class SecurityConfig {
     private static final String[] allowedPathsWithOutAuthentication = {"/h2-console/**","/api/register/**", "/api/auth/login/**"};
     private static final String[] adminPathAllowed = {};
     private static final String[] teacherPathAllowed = {"/api/v1/questions/**","/api/v1/user/courses","/api/v1/exam/**"};
-    private static final String[] studentPathAllowed = {};
+    private static final String[] studentPathAllowed = {"/api/v1/exam/**","/api/v1/user/courses"};
     private final JwtAuthorizationFilter jwtAuthFilter;
 
     public SecurityConfig(JwtAuthorizationFilter jwtAuthFilter) {
