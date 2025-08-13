@@ -19,9 +19,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
     private static final String[] allowedPathsWithOutAuthentication = {"/h2-console/**","/api/register/**", "/api/auth/login/**"};
-    private static final String[] adminPathAllowed = {};
-    private static final String[] teacherPathAllowed = {"/api/v1/questions/**","/api/v1/user/courses","/api/v1/exam/**"};
-    private static final String[] studentPathAllowed = {"/api/v1/exam/**","/api/v1/user/courses"};
+//    private static final String[] adminPathAllowed = {};
+//    private static final String[] teacherPathAllowed = {"/api/v1/questions/**","/api/v1/user/courses","/api/v1/exam/**"};
+//    private static final String[] studentPathAllowed = {"/api/v1/exam/**","/api/v1/user/courses"};
     private final JwtAuthorizationFilter jwtAuthFilter;
 
     public SecurityConfig(JwtAuthorizationFilter jwtAuthFilter) {
@@ -40,9 +40,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authrize -> authrize
                         .requestMatchers(allowedPathsWithOutAuthentication).permitAll()
-                        .requestMatchers(adminPathAllowed).hasAuthority("ADMIN")
-                        .requestMatchers(studentPathAllowed).hasAuthority("STUDENT")
-                        .requestMatchers(teacherPathAllowed).hasAuthority("TEACHER")
+//                        .requestMatchers(adminPathAllowed).hasAuthority("ADMIN")
+//                        .requestMatchers(studentPathAllowed).hasAuthority("STUDENT")
+//                        .requestMatchers(teacherPathAllowed).hasAuthority("TEACHER")
                         .anyRequest().authenticated()
                 ).sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -53,7 +53,6 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-
         return new BCryptPasswordEncoder();
     }
 

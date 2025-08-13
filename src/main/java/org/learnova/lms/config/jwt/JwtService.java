@@ -21,7 +21,7 @@ public class JwtService {
     public static final String TOKEN_TYPE = "token_type";
     private final PrivateKey privateKey;
     private final PublicKey publicKey;
-    @Value("${app.security.jwt.refresh-token-expiration}")
+    @Value("${app.security.jwt.access-token-expiration}")
     private long accessTokenExpiration;
     @Value("${app.security.jwt.refresh-token-expiration}")
     private long refreshTokenExpiration;
