@@ -33,7 +33,7 @@ public class DataLoader implements CommandLineRunner {
         }
 
 
-        AppUser use = new AppUser("admin@gmail.com", passwordEncoder.encode("12345678"), "admin@gmail.com", new Role("ADMIN"));
+        AppUser use = new AppUser("admin@gmail.com", passwordEncoder.encode("123456789"), "admin@gmail.com", new Role("ADMIN"));
         userRepository.save(use);
     }
 

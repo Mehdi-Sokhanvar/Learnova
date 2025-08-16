@@ -43,7 +43,7 @@ class RegisterControllerTest {
     }
 
     @Test
-    void registerStudent() throws Exception {
+    void register_Student() throws Exception {
         RegisterDTO registerDTO = new RegisterDTO(faker.internet().emailAddress(), "1234567899");
 
         mockMvc.perform(
@@ -57,7 +57,7 @@ class RegisterControllerTest {
 
 
     @Test
-    void registerTeacher() throws Exception {
+    void register_Teacher() throws Exception {
 
         RegisterDTO registerDTO = new RegisterDTO(faker.internet().emailAddress(), "1234567899");
 
@@ -78,16 +78,14 @@ class RegisterControllerTest {
                 post("/api/register/teachers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerDTOFirst))
-        );
+        ).andExpect(status().isCreated());
+
         mockMvc.perform(
                 post("/api/register/teachers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerDTOSecond))
         ).andExpect(status().isConflict());
-
-
     }
-
 
     @Test
     void registerUser_invalidInput() throws Exception {

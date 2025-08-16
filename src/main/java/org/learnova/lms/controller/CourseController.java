@@ -48,7 +48,7 @@ public class CourseController {
         return ResponseEntity.status(HttpStatus.CREATED).body(courseResponseDTO);
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/assign-role")
     public ResponseEntity<ApiResponse> assignRole(@Valid @RequestBody EnrollmentRoleForUser user, Locale locale) {
         courseService.assignUserRoleInCourses(user);
@@ -62,6 +62,7 @@ public class CourseController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> editCourse(@PathVariable Long id, @Valid @RequestBody CourseRequestDTO course,Locale locale) {
         courseService.updateCourse(id, course);
@@ -74,7 +75,7 @@ public class CourseController {
         return ResponseEntity.ok(new ApiResponse(true,message));
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deleteCourse(@PathVariable Long id,Locale locale) {
         courseService.deleteCourse(id);
@@ -86,7 +87,7 @@ public class CourseController {
         return ResponseEntity.ok(new ApiResponse(true,message));
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{userId}/course/{courseId}")
     public ResponseEntity<SuccessResponse> deleteUserFromCourse(@PathVariable Long userId,
                                                                 @PathVariable Long courseId,
@@ -100,15 +101,12 @@ public class CourseController {
         return ResponseEntity.ok(new SuccessResponse(message));
     }
 
+    @PreAuthorize("hasRole('{TEACHER,ADMIN}')")
     @GetMapping("/students/{course_id}")
     public ResponseEntity<List<StudentResponse>> listStudentFromCourse(@PathVariable Long course_id) {
 
         return new ResponseEntity<>(courseService.listStudentsForCourse(course_id), HttpStatus.OK);
     }
-
-
-
-
 }
 
 
