@@ -13,8 +13,6 @@ import org.learnova.lms.domain.user.Teacher;
 import org.learnova.lms.dto.request.CourseRequestDTO;
 import org.learnova.lms.dto.request.EnrollmentRoleForUser;
 import org.learnova.lms.dto.request.LoginDTO;
-import org.learnova.lms.exception.StudnetNotAssignedThisCourse;
-import org.learnova.lms.exception.TeacherNotAssignedThisCourse;
 import org.learnova.lms.repository.course.CourseRepository;
 import org.learnova.lms.repository.role.RoleRepository;
 import org.learnova.lms.repository.user.StudentRepository;
@@ -39,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class CourseControllerTest {
+public class CourseIntegrationTest {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -72,7 +70,7 @@ class CourseControllerTest {
         AppUser userSaved = userRepository.save(appUser);
         LoginDTO adminLogin = new LoginDTO(userSaved.getUserName(), "123456789");
         String contentAsString = mockMvc.perform(
-                        post("/api/auth/login")
+                        post("/auth/login")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(adminLogin))
                 ).andExpect(status().isOk())
@@ -87,7 +85,7 @@ class CourseControllerTest {
     }
 
     @Test
-    void addCourse() throws Exception {
+    void givenValidCourseRequest_whenAddCourse_thenReturns201Created() throws Exception {
         CourseRequestDTO requestDTO = new CourseRequestDTO(faker.educator().course(), faker.team().name(), "2023-12-03", "2025-12-23");
         mockMvc.perform(
                 post("/api/v1/courses")
@@ -99,7 +97,7 @@ class CourseControllerTest {
 
 
     @Test
-    void occurs_DataTimeException() throws Exception {
+    void givenEndDateBeforeStartDate_whenAddCourse_thenReturns400BadRequest() throws Exception {
         CourseRequestDTO requestDTO = new CourseRequestDTO(faker.educator().course(), faker.team().name(), "2023-12-03", "2022-12-23");
         mockMvc.perform(
                 post("/api/v1/courses")
@@ -109,6 +107,7 @@ class CourseControllerTest {
         ).andExpect(status().isBadRequest());
 
     }
+
 
     @Test
     void createCourse_invalidInput_shouldReturn400() throws Exception {
@@ -129,7 +128,7 @@ class CourseControllerTest {
     }
 
     @Test
-    void assignRole() throws Exception {
+    void givenTeacherAndStudent_whenAssignRoleToCourse_thenReturns200Ok() throws Exception {
         Course courseCreated = courseRepository.save(new Course(faker.educator().course(), faker.educator().course(), LocalDate.parse("2025-08-01"), LocalDate.parse("2025-08-10"), UUID.randomUUID()));
 
         Teacher teacherSaved = teacherRepository.save(new Teacher("teacher@gmail.com", passwordEncoder.encode("123456789"), "teacher@gmail.com", new Role("TEACHER")));
@@ -155,7 +154,7 @@ class CourseControllerTest {
     }
 
     @Test
-    void editCourse() throws Exception {
+    void givenExistingCourse_whenEditCourse_thenReturns200Ok() throws Exception {
 
         Course courseCreated = courseRepository.save(new Course(faker.educator().course(), faker.educator().course(), LocalDate.parse("2025-08-01"), LocalDate.parse("2025-08-10"), UUID.randomUUID()));
 
@@ -170,7 +169,7 @@ class CourseControllerTest {
     }
 
     @Test
-    void deleteCourse() throws Exception {
+    void givenExistingCourse_whenDeleteCourse_thenReturns200Ok() throws Exception {
         Course courseCreated = courseRepository.save(new Course(faker.educator().course(), faker.educator().course(), LocalDate.parse("2025-08-01"), LocalDate.parse("2025-08-10"), UUID.randomUUID()));
         mockMvc.perform(
                 delete("/api/v1/courses/" + courseCreated.getId())
@@ -180,7 +179,7 @@ class CourseControllerTest {
 
 
     @Test
-    void updateCourse_courseNotFound_shouldReturn404() throws Exception {
+    void givenNonExistingCourse_whenUpdateCourse_thenReturns400BadRequest() throws Exception {
         CourseRequestDTO dto = new CourseRequestDTO("Java Course", "desc", "2025-08-01", "2025-08-10");
         mockMvc.perform(put("/api/v1/courses/9999")
                         .header("Authorization", "Bearer " + adminAccessToken)
@@ -190,7 +189,7 @@ class CourseControllerTest {
     }
 
     @Test
-    void deleteCourse_courseNotFound_shouldReturn404() throws Exception {
+    void givenNonExistingCourse_whenDeleteCourse_thenReturns400BadRequest() throws Exception {
         mockMvc.perform(delete("/api/v1/courses/9999")
                         .header("Authorization", "Bearer " + adminAccessToken))
                 .andExpect(status().isBadRequest());
@@ -198,7 +197,7 @@ class CourseControllerTest {
     }
 
     @Test
-    void assignRole_userNotFound_shouldReturn404() throws Exception {
+    void givenNonExistingUser_whenAssignRoleToCourse_thenReturns404NotFound() throws Exception {
         Course course = courseRepository.save(new Course("Course", "desc", LocalDate.now(), LocalDate.now().plusDays(5), UUID.randomUUID()));
         EnrollmentRoleForUser dto = new EnrollmentRoleForUser(9999L, course.getId());
 
@@ -210,7 +209,7 @@ class CourseControllerTest {
     }
 
     @Test
-    void deleteUserFromCourse_userNotEnrolled_shouldReturn400() throws Exception {
+    void givenNonEnrolledUser_whenDeleteUserFromCourse_thenReturns400BadRequest() throws Exception {
         Course course = courseRepository.save(new Course("Course", "desc", LocalDate.now(), LocalDate.now().plusDays(5), UUID.randomUUID()));
         Student student = studentRepository.save(new Student("stud@gmail.com", passwordEncoder.encode("123456789"), "stud@gmail.com", new Role("STUDENT")));
 
@@ -218,10 +217,6 @@ class CourseControllerTest {
                         .header("Authorization", "Bearer " + adminAccessToken))
                 .andExpect(status().isBadRequest());
     }
-
-
-
-
 
 
 }

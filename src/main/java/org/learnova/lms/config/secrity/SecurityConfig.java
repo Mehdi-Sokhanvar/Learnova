@@ -18,7 +18,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private static final String[] allowedPathsWithOutAuthentication = {"/h2-console/**", "/api/register/**", "/api/auth/login/**"};
     private final JwtAuthorizationFilter jwtAuthFilter;
 
     public SecurityConfig(JwtAuthorizationFilter jwtAuthFilter) {
@@ -36,7 +35,7 @@ public class SecurityConfig {
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authrize -> authrize
-                        .requestMatchers(allowedPathsWithOutAuthentication).permitAll()
+                        .requestMatchers("/h2-console/**", "/auth/**").permitAll()
                         .anyRequest().authenticated()
                 ).sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

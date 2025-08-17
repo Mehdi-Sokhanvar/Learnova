@@ -144,7 +144,7 @@ public class ExamController {
     }
 
     @PreAuthorize("hasRole('{TEACHER,ADMIN}')")
-    @GetMapping("{examId}/report")
+    @GetMapping("/{examId}/report")
     public ResponseEntity<List<ReportDTO>> reportExam(@PathVariable Long examId
             , Principal principal, Locale locale) {
         AppUser teacher = getUser((UsernamePasswordAuthenticationToken) principal);

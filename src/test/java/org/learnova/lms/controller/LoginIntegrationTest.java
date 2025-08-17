@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class LoginControllerTest {
+public class LoginIntegrationTest {
 
 
     @Autowired
@@ -58,7 +58,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void login_Success() throws Exception {
+    void givenValidCredentials_whenLogin_thenReturns200Ok() throws Exception {
         AppUser appUser = new AppUser();
         appUser.setUserName("email@email");
         appUser.setEmail("email@email");
@@ -70,7 +70,7 @@ class LoginControllerTest {
                 new LoginDTO(userSaved.getUserName(), "123456789");
 
         mockMvc.perform(
-                post("/api/auth/login")
+                post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginDTO))
         ).andExpect(status().isOk());
@@ -78,12 +78,12 @@ class LoginControllerTest {
     }
 
     @Test
-    void login_Fail_UserNotFound() throws Exception {
+    void givenNonExistingUser_whenLogin_thenReturns400BadRequest() throws Exception {
 
         LoginDTO loginDTO = new LoginDTO(faker.internet().emailAddress(), "123456789");
 
         mockMvc.perform(
-                post("/api/auth/login")
+                post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginDTO))
         ).andExpect(status().isBadRequest());
@@ -91,7 +91,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void login_Fail_BadCredentials() throws Exception {
+    void givenWrongPassword_whenLogin_thenReturns400BadRequest() throws Exception {
         AppUser appUser = new AppUser();
         appUser.setUserName("email@email");
         appUser.setEmail("email@email");
@@ -101,18 +101,18 @@ class LoginControllerTest {
         LoginDTO loginDTO = new LoginDTO("email@email", "wrongpassword");
 
         mockMvc.perform(
-                post("/api/auth/login")
+                post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginDTO))
         ).andExpect(status().isBadRequest());
     }
 
     @Test
-    void login_Fail_InvalidInput() throws Exception {
+    void givenInvalidInput_whenLogin_thenReturns400BadRequest() throws Exception {
         LoginDTO loginDTO = new LoginDTO("notanemail", "");
 
         mockMvc.perform(
-                post("/api/auth/login")
+                post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginDTO))
         ).andExpect(status().isBadRequest());

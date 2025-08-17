@@ -18,6 +18,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+/**
+ * REST controller for managing courses.
+ * Provides endpoints for creating, editing, deleting courses,
+ * assigning roles to users in courses, and listing students.
+ */
 @RestController
 @RequestMapping("/api/v1/courses")
 public class CourseController {
@@ -31,6 +36,15 @@ public class CourseController {
     }
 
 
+    // ... constructor injection ...
+
+    /**
+     * Adds a new course. Only accessible by admins.
+     *
+     * @param course the course data to create
+     * @param locale the locale to fetch localized messages
+     * @return ResponseEntity containing the created course details
+     */
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<CourseCreatedResponseDTO>addCourse(@Valid @RequestBody CourseRequestDTO course,
@@ -48,6 +62,13 @@ public class CourseController {
         return ResponseEntity.status(HttpStatus.CREATED).body(courseResponseDTO);
     }
 
+    /**
+     * Assigns a role to a user in a course. Only accessible by admins.
+     *
+     * @param user the user and course information with the role
+     * @param locale the locale to fetch localized messages
+     * @return ResponseEntity with a success message
+     */
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/assign-role")
     public ResponseEntity<ApiResponse> assignRole(@Valid @RequestBody EnrollmentRoleForUser user, Locale locale) {
@@ -62,6 +83,14 @@ public class CourseController {
     }
 
 
+    /**
+     * Updates an existing course by ID. Only accessible by admins.
+     *
+     * @param id the ID of the course to update
+     * @param course the updated course data
+     * @param locale the locale to fetch localized messages
+     * @return ResponseEntity with a success message
+     */
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> editCourse(@PathVariable("id") Long id, @Valid @RequestBody CourseRequestDTO course,Locale locale) {
@@ -75,6 +104,14 @@ public class CourseController {
         return ResponseEntity.ok(new ApiResponse(true,message));
     }
 
+
+    /**
+     * Deletes a course by ID. Only accessible by admins.
+     *
+     * @param id the ID of the course to delete
+     * @param locale the locale to fetch localized messages
+     * @return ResponseEntity with a success message
+     */
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deleteCourse(@PathVariable("id") Long id,Locale locale) {
@@ -87,6 +124,14 @@ public class CourseController {
         return ResponseEntity.ok(new ApiResponse(true,message));
     }
 
+    /**
+     * Deletes a user from a specific course. Only accessible by admins.
+     *
+     * @param userId the ID of the user to remove
+     * @param courseId the ID of the course
+     * @param locale the locale to fetch localized messages
+     * @return ResponseEntity with a success message
+     */
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{userId}/course/{courseId}")
     public ResponseEntity<SuccessResponse> deleteUserFromCourse(@PathVariable Long userId,
@@ -101,6 +146,13 @@ public class CourseController {
         return ResponseEntity.ok(new SuccessResponse(message));
     }
 
+
+    /**
+     * Lists all students enrolled in a course. Accessible by teachers and admins.
+     *
+     * @param course_id the ID of the course
+     * @return ResponseEntity containing the list of students
+     */
     @PreAuthorize("hasRole('{TEACHER,ADMIN}')")
     @GetMapping("/students/{course_id}")
     public ResponseEntity<List<StudentResponse>> listStudentFromCourse(@PathVariable Long course_id) {

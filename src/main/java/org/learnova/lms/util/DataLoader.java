@@ -1,5 +1,4 @@
-package org.learnova.lms;
-
+package org.learnova.lms.util;
 
 import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.domain.user.Role;

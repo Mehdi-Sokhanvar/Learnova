@@ -21,6 +21,12 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Locale;
 
+
+/**
+ * REST controller for managing questions.
+ * Provides endpoints for teachers to create, add to exams, delete,
+ * and retrieve questions.
+ */
 @RestController
 @RequestMapping("/api/v1/questions")
 public class QuestionController {
@@ -35,6 +41,15 @@ public class QuestionController {
     }
 
 
+    /**
+     * Creates a new question for the authenticated teacher.
+     *
+     * @param dto the question data
+     * @param principal the authenticated user principal
+     * @param locale the locale for messages
+     * @return ResponseEntity with success message
+     */
+
     @PreAuthorize("hasRole('TEACHER')")
     @PostMapping
     public ResponseEntity<ApiResponse> createQuestion(@RequestBody QuestionDTO dto, Principal principal, Locale locale) {
@@ -46,6 +61,14 @@ public class QuestionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse(true, message));
     }
 
+    /**
+     * Adds a question to an exam for the authenticated teacher.
+     *
+     * @param dto the question and exam information
+     * @param principal the authenticated user principal
+     * @param locale the locale for messages
+     * @return ResponseEntity with success message
+     */
     @PreAuthorize("hasRole('TEACHER')")
     @PostMapping("/add/exam")
     public ResponseEntity<ApiResponse> addQuestionTOCourse(@RequestBody QuestionRequestDto dto, Principal principal, Locale locale) {
@@ -55,6 +78,15 @@ public class QuestionController {
         String message = messageSource.getMessage("question.exam.add.success", null, locale);
         return ResponseEntity.ok(new ApiResponse(true, message));
     }
+
+    /**
+     * Deletes a question created by the authenticated teacher.
+     *
+     * @param questionId the ID of the question to delete
+     * @param principal the authenticated user principal
+     * @param locale the locale for messages
+     * @return ResponseEntity with success message
+     */
 
     @PreAuthorize("hasRole('TEACHER')")
     @DeleteMapping("/{questionId}")
@@ -66,6 +98,15 @@ public class QuestionController {
         return ResponseEntity.ok(new ApiResponse(true, message));
     }
 
+    /**
+     * Deletes a question from an exam.
+     *
+     * @param questionId the ID of the question
+     * @param examId the ID of the exam
+     * @param principal the authenticated user principal
+     * @param locale the locale for messages
+     * @return ResponseEntity with success message
+     */
     @PreAuthorize("hasRole('TEACHER')")
     @DeleteMapping("/{questionId}/exam/{examId}")
     public ResponseEntity<ApiResponse> deleteQuestionFromExam(@PathVariable Long questionId, @PathVariable Long examId, Principal principal, Locale locale) {
@@ -76,6 +117,13 @@ public class QuestionController {
         return ResponseEntity.ok(new ApiResponse(true, message));
     }
 
+    /**
+     * Retrieves all questions for a specific exam for the authenticated teacher.
+     *
+     * @param examId the ID of the exam
+     * @param principal the authenticated user principal
+     * @return ResponseEntity with list of questions
+     */
     @PreAuthorize("hasRole('TEACHER')")
     @GetMapping("/{examId}/exam")
     public ResponseEntity<List<QuestionResponseDTO>> getExamQuestions(@PathVariable Long examId, Principal principal) {
@@ -84,6 +132,12 @@ public class QuestionController {
         return new ResponseEntity<>(questionService.findAllExamQuestions(teacher, examId), HttpStatus.OK);
     }
 
+    /**
+     * Retrieves all questions created by the authenticated teacher.
+     *
+     * @param principal the authenticated user principal
+     * @return ResponseEntity with list of questions
+     */
     @PreAuthorize("hasRole('TEACHER')")
     @GetMapping("/teacher")
     public ResponseEntity<List<QuestionResponseDTO>> getTeacherQuestion(Principal principal) {
