@@ -46,29 +46,21 @@ class QuestionControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    private Faker faker = new Faker();
-
-    private String teacherAccessToken;
-
     @Autowired
     private CourseRepository courseRepository;
-
     @Autowired
     private RoleRepository roleRepository;
-
     @Autowired
     private QuestionRepository questionRepository;
 
+    private Faker faker = new Faker();
+    private String teacherAccessToken;
     private Course course;
 
 
@@ -177,11 +169,6 @@ class QuestionControllerTest {
                   "options": [
                     { "text": "A programming language", "isCorrect": true },
                     { "text": "A coffee brand", "isCorrect": false },
-                    { "text": "A web browser", "isCorrect": false },
-                    { "text": "A web browser", "isCorrect": false },
-                    { "text": "A web browser", "isCorrect": false },
-                    { "text": "A web browser", "isCorrect": false },
-                    { "text": "A web browser", "isCorrect": false },
                     { "text": "A web browser", "isCorrect": false }
                   ],
                   "shuffled": true

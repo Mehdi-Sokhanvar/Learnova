@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface ExamRepository extends JpaRepository<Exam, Long> {
 
-    @Query("SELECT e FROM Exam e WHERE e.course.id = :course")
-    List<Exam> findExamByCourse(Long course);
+    List<Exam> findByCourseId(Long courseId);
 
 }

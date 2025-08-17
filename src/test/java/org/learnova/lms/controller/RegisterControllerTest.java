@@ -30,16 +30,13 @@ class RegisterControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private UserRepository userRepository;
-
-
     @Autowired
     private CourseRepository courseRepository;
+
 
     private Faker faker = new Faker();
 

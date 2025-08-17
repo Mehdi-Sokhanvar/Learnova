@@ -138,6 +138,7 @@ class ExamControllerTest {
     @AfterEach
     void afterEach() {
         examSessionRepository.deleteAll();
+        examQuestionRepository.deleteAll();
         examRepository.deleteAll();
         courseRepository.deleteAll();
         questionRepository.deleteAll();
@@ -333,119 +334,89 @@ class ExamControllerTest {
         ).andExpect(status().isCreated());
     }
 
-//    @Test
-//    void getCurrentQuestion() throws Exception {
-//
-//        MultipleOptionQuestion question1 = new MultipleOptionQuestion();
-//        question1.setTitle(faker.educator().course());
-//        question1.setDescription(faker.educator().course());
-//        question1.setDefaultScore(12.12);
-//        question1.setIdentifier(UUID.randomUUID().toString());
-//        question1.setLevel(QuestionLevel.SIMPLE);
-//        question1.setCategory(new Category("Math"));
-//        question1.setTeacher(userRepository.findByUserName("teacher@gmail.com"));
-//        question1.setType(QType.ESSAY);
-//        MultipleOptionQuestion questionSaved1 = questionRepository.save(question1);
-//
-//        TrueFalseQuestion question2 = new TrueFalseQuestion();
-//        question2.setTitle(faker.educator().course());
-//        question2.setDescription(faker.educator().course());
-//        question2.setDefaultScore(12.12);
-//        question2.setIdentifier(UUID.randomUUID().toString());
-//        question2.setLevel(QuestionLevel.SIMPLE);
-//        question2.setCategory(new Category("Math"));
-//        question2.setTeacher(userRepository.findByUserName("teacher@gmail.com"));
-//        question2.setType(QType.ESSAY);
-//        TrueFalseQuestion questionSaved2 = questionRepository.save(question2);
-//
-//        EssayQuestion question3 = new EssayQuestion();
-//        question3.setTitle(faker.educator().course());
-//        question3.setDescription(faker.educator().course());
-//        question3.setDefaultScore(12.12);
-//        question3.setIdentifier(UUID.randomUUID().toString());
-//        question3.setLevel(QuestionLevel.SIMPLE);
-//        question3.setCategory(new Category("Math"));
-//        question3.setAnswer("OOP is a programming language");
-//        question3.setMaxLength(12);
-//        question3.setTeacher(userRepository.findByUserName("teacher@gmail.com"));
-//        question3.setType(QType.ESSAY);
-//        EssayQuestion questionSaved3 = questionRepository.save(question3);
-//
-//        ZoneId examZone = ZoneId.of("Asia/Tehran");
-//
-//        Instant startTime = LocalDate.parse("2022-12-12")
-//                .atTime(9, 30)                  // ساعت دلخواه
-//                .atZone(examZone)
-//                .toInstant();
-//
-//        Instant endTime = LocalDate.parse("2026-12-12")
-//                .atTime(11, 30)                 // ساعت پایان
-//                .atZone(examZone)
-//                .toInstant();
-//        Exam saveExam = examRepository.save(
-//                new Exam(
-//                        "title",
-//                        "description",
-//                        LocalDate.parse("2022-12-12"),
-//                        startTime,
-//                        endTime,
-//                        String.valueOf(examZone),
-//                        ExamStatus.InProgress,
-//                        courseRepository.findById(this.course.getId()).get(),
-//                        teacherRepository.findTeacherByEmail("teacher@gmail.com").get(),
-//                        70.0,
-//                        56.0));
-//
-//        ExamQuestion examQuestion1=examQuestionRepository.save(new ExamQuestion(saveExam,questionSaved1,10.0));
-//        ExamQuestion examQuestion2=examQuestionRepository.save(new ExamQuestion(saveExam,questionSaved2,10.0));
-//        ExamQuestion examQuestion3=examQuestionRepository.save(new ExamQuestion(saveExam,questionSaved3,10.0));
-//        List<ExamQuestion> questions =  examQuestionRepository.findExamQuestionByExam_Id(saveExam.getId());
-//        List<Long> questionIds = questions.stream().map(ExamQuestion::getId).collect(Collectors.toList());
-//        ExamSession examSession=examSessionRepository.save(
-//                new ExamSession(
-//                        saveExam,studentRepository.findStudentByEmail("student@gmail.com").get()
-//                        ,Instant.now(),Instant.now(),ExamStatus.InProgress,0.0,questionIds,List.of(new StudentAnswer()),0
-//                )
-//        );
-//
-//        mockMvc.perform(
-//                get("/api/v1/exam/exam-sessions/" + examSession.getId() + "/current")
-//                        .header("Authorization", "Bearer " + studentAccessToken)
-//        ).andExpect(status().isOk());
-//
-//
-//    }
+    @Test
+    void getCurrentQuestion() throws Exception {
 
-//    @Test
-//    void navigateQuestion() {
-//    }
-//
-//    @Test
-//    void saveAnswer() {
-//    }
-//
-//    @Test
-//    void allQuestionAnswerStudent() {
-//    }
-//
-//    @Test
-//    void submitExam() {
-//    }
-//
-//    @Test
-//    void detailStudentExamInfo() {
-//    }
-//
-//    @Test
-//    void detailSessionStudent() {
-//    }
-//
-//    @Test
-//    void assignScoreToEssayQuestion() {
-//    }
-//
-//    @Test
-//    void reportExam() {
-//    }
+        MultipleOptionQuestion question1 = new MultipleOptionQuestion();
+        question1.setTitle(faker.educator().course());
+        question1.setDescription(faker.educator().course());
+        question1.setDefaultScore(12.12);
+        question1.setIdentifier(UUID.randomUUID().toString());
+        question1.setLevel(QuestionLevel.SIMPLE);
+        question1.setCategory(new Category("Math"));
+        question1.setTeacher(userRepository.findByUserName("teacher@gmail.com"));
+        question1.setType(QType.MULTIPLE_CHOICE);
+        MultipleOptionQuestion questionSaved1 = questionRepository.save(question1);
+
+        TrueFalseQuestion question2 = new TrueFalseQuestion();
+        question2.setTitle(faker.educator().course());
+        question2.setDescription(faker.educator().course());
+        question2.setDefaultScore(12.12);
+        question2.setIdentifier(UUID.randomUUID().toString());
+        question2.setLevel(QuestionLevel.SIMPLE);
+        question2.setCategory(new Category("Math"));
+        question2.setTeacher(userRepository.findByUserName("teacher@gmail.com"));
+        question2.setType(QType.TRUE_FALSE);
+        TrueFalseQuestion questionSaved2 = questionRepository.save(question2);
+
+        EssayQuestion question3 = new EssayQuestion();
+        question3.setTitle(faker.educator().course());
+        question3.setDescription(faker.educator().course());
+        question3.setDefaultScore(12.12);
+        question3.setIdentifier(UUID.randomUUID().toString());
+        question3.setLevel(QuestionLevel.SIMPLE);
+        question3.setCategory(new Category("Math"));
+        question3.setAnswer("OOP is a programming language");
+        question3.setMaxLength(12);
+        question3.setTeacher(userRepository.findByUserName("teacher@gmail.com"));
+        question3.setType(QType.ESSAY);
+        EssayQuestion questionSaved3 = questionRepository.save(question3);
+
+        ZoneId examZone = ZoneId.of("Asia/Tehran");
+
+        Instant startTime = LocalDate.parse("2022-12-12")
+                .atTime(9, 30)                  // ساعت دلخواه
+                .atZone(examZone)
+                .toInstant();
+
+        Instant endTime = LocalDate.parse("2026-12-12")
+                .atTime(11, 30)                 // ساعت پایان
+                .atZone(examZone)
+                .toInstant();
+        Exam saveExam = examRepository.save(
+                new Exam(
+                        "title",
+                        "description",
+                        LocalDate.parse("2022-12-12"),
+                        startTime,
+                        endTime,
+                        String.valueOf(examZone),
+                        ExamStatus.InProgress,
+                        courseRepository.findById(this.course.getId()).get(),
+                        teacherRepository.findTeacherByEmail("teacher@gmail.com").get(),
+                        70.0,
+                        56.0));
+
+        ExamQuestion examQuestion1=examQuestionRepository.save(new ExamQuestion(saveExam,questionSaved1,10.0));
+        ExamQuestion examQuestion2=examQuestionRepository.save(new ExamQuestion(saveExam,questionSaved2,10.0));
+        ExamQuestion examQuestion3=examQuestionRepository.save(new ExamQuestion(saveExam,questionSaved3,10.0));
+        List<ExamQuestion> questions =  examQuestionRepository.findExamQuestionByExam_Id(saveExam.getId());
+        List<Long> questionIds = questions.stream().map(ExamQuestion::getId).collect(Collectors.toList());
+        ExamSession examSession=examSessionRepository.save(
+                new ExamSession(
+                        saveExam,studentRepository.findStudentByEmail("student@gmail.com").get()
+                        ,Instant.now(),Instant.now(),ExamStatus.InProgress,0.0,questionIds,List.of(new StudentAnswer()),0
+                )
+        );
+
+        mockMvc.perform(
+                get("/api/v1/exam/exam-sessions/" + examSession.getId() + "/current")
+                        .header("Authorization", "Bearer " + studentAccessToken)
+        ).andExpect(status().isOk());
+    }
+
+
+
+
 
 }

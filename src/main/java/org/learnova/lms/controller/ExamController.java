@@ -46,7 +46,7 @@ public class ExamController {
 
     @PreAuthorize("hasRole('TEACHER')")
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse> editExam(@PathVariable Long id, @RequestBody ExamRequestDTO exam,
+    public ResponseEntity<ApiResponse> editExam(@PathVariable("id") Long id, @RequestBody ExamRequestDTO exam,
                                                 Authentication authentication, Locale locale) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         AppUser teacher = userDetails.getUser();
@@ -58,7 +58,7 @@ public class ExamController {
 
     @PreAuthorize("hasRole('TEACHER')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteExam(@PathVariable Long id, Authentication authentication, Locale locale) {
+    public ResponseEntity<ApiResponse> deleteExam(@PathVariable("id") Long id, Authentication authentication, Locale locale) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         AppUser teacher = userDetails.getUser();
         examService.deleteExam(id, teacher.getId());
@@ -69,7 +69,7 @@ public class ExamController {
 
     @PreAuthorize("hasAnyRole('TEACHER','STUDENT')")
     @GetMapping("/{id}/all")
-    public ResponseEntity<List<ExamResponseDTO>> getAllExams(@PathVariable Long id, Principal principal) {
+    public ResponseEntity<List<ExamResponseDTO>> getAllExams(@PathVariable("id") Long id, Principal principal) {
         AppUser user = getUser((UsernamePasswordAuthenticationToken) principal);
         return new ResponseEntity<>(examService.examListInCourse(id, user), HttpStatus.OK);
     }
@@ -84,7 +84,7 @@ public class ExamController {
 
     @GetMapping("/exam-sessions/{sessionId}/current")
     @PreAuthorize("hasRole('STUDENT')")
-    public ResponseEntity<QuestionResponseDTO> getCurrentQuestion(@PathVariable Long sessionId, Principal principal, Locale locale) {
+    public ResponseEntity<QuestionResponseDTO> getCurrentQuestion(@PathVariable("sessionId") Long sessionId, Principal principal, Locale locale) {
         AppUser studentInExam = getUser((UsernamePasswordAuthenticationToken) principal);
         return new ResponseEntity<>(examService.getCurrentQuestion(sessionId, studentInExam, locale), HttpStatus.OK);
     }
@@ -92,7 +92,7 @@ public class ExamController {
 
     @PreAuthorize("hasRole('STUDENT')")
     @PostMapping("/exam-sessions/{sessionId}/navigate")
-    public void navigateQuestion(@PathVariable Long sessionId, @RequestParam String direction, Principal principal, Locale locale) {
+    public void navigateQuestion(@PathVariable() Long sessionId, @RequestParam String direction, Principal principal, Locale locale) {
         AppUser studentInExam = getUser((UsernamePasswordAuthenticationToken) principal);
         examService.changeCurrentQuestion(sessionId, direction, studentInExam, locale);
     }

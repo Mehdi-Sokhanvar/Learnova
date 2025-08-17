@@ -157,7 +157,7 @@ public class ExamServiceImpl implements ExamService {
             }
         }
 
-        List<Exam> examFound = examRepository.findExamByCourse(courseId);
+        List<Exam> examFound = examRepository.findByCourseId(courseId);
         return examFound
                 .stream()
                 .map(item -> new ExamResponseDTO(
@@ -188,12 +188,12 @@ public class ExamServiceImpl implements ExamService {
                 examSessionRepository.findByExam_IdAndStudent_IdAndStatus(examId, studentId, ExamStatus.InProgress);
         existingSession.ifPresent(examSession ->
                 new ExamSessionResponseDTO(
-                studentId,
-                examId,
-                now,
-                examSession.getCurrentQuestion(),
-                messageSource.getMessage("ExamSession.Continue", null, locale)
-        ));
+                        studentId,
+                        examId,
+                        now,
+                        examSession.getCurrentQuestion(),
+                        messageSource.getMessage("ExamSession.Continue", null, locale)
+                ));
 
         ExamSession examSession = new ExamSession();
         examSession.setStartTime(now);
@@ -270,6 +270,7 @@ public class ExamServiceImpl implements ExamService {
                         examSession.getQuestionOrder().get(examSession.getCurrentQuestion()));
 
         questionFound.getQuestion().setDefaultScore(questionFound.getScore());
+        Question question = questionFound.getQuestion();
         return questionServiceImpl.convertToDto(questionFound.getQuestion());
     }
 

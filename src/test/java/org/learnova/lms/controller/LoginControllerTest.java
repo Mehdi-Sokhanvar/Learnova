@@ -32,13 +32,10 @@ class LoginControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -53,6 +50,7 @@ class LoginControllerTest {
     void setUp() {
         roleRepository.deleteAll();
     }
+
     @AfterEach
     void afterEach() {
         userRepository.deleteAll();

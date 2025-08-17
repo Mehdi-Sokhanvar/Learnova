@@ -64,7 +64,7 @@ public class CourseController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse> editCourse(@PathVariable Long id, @Valid @RequestBody CourseRequestDTO course,Locale locale) {
+    public ResponseEntity<ApiResponse> editCourse(@PathVariable("id") Long id, @Valid @RequestBody CourseRequestDTO course,Locale locale) {
         courseService.updateCourse(id, course);
 
         String message = messageSource.getMessage(
@@ -77,7 +77,7 @@ public class CourseController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteCourse(@PathVariable Long id,Locale locale) {
+    public ResponseEntity<ApiResponse> deleteCourse(@PathVariable("id") Long id,Locale locale) {
         courseService.deleteCourse(id);
         String message = messageSource.getMessage(
                 "course.delete.success",

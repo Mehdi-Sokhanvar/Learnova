@@ -4,6 +4,9 @@ public class AnswerOptionDTO {
     private String text;
     private Boolean isCorrect;
 
+    public AnswerOptionDTO() {
+    }
+
     public AnswerOptionDTO(String text) {
         this.text = text;
     }

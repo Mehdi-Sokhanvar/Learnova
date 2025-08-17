@@ -176,6 +176,7 @@ public class QuestionServiceImpl implements QuestionService {
     public QuestionResponseDTO convertToDto(Question question) {
         String questionType = String.valueOf(question.getType());
         QuestionFactory factory = provider.getFactory(questionType);
+        System.out.println(factory.getClass().getName());
         return factory.convertToDto(question);
     }
 }
