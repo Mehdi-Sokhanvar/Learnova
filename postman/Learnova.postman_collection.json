@@ -1,10 +1,11 @@
 {
 	"info": {
-		"_postman_id": "1435f58c-c0c3-4802-af33-34ade56046d0",
+		"_postman_id": "a6c71597-187f-48d5-9db2-d2f99a295897",
 		"name": "Learnova",
 		"description": "Online exam platform",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "44013118"
+		"_exporter_id": "47488936",
+		"_collection_link": "https://bahmanmba2025-3003153.postman.co/workspace/Bahman's-Workspace~8797afb8-321b-4aa0-824a-a85713ae1e73/collection/47488936-a6c71597-187f-48d5-9db2-d2f99a295897?action=share&source=collection_link&creator=47488936"
 	},
 	"item": [
 		{
@@ -31,12 +32,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/register/teachers",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/register/teachers",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"register",
@@ -66,12 +65,47 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/register/teachers",
-									"protocol": "http",
+									"raw": "{{$HttpsServer}}/api/register/teachers",
 									"host": [
-										"localhost"
+										"{{$HttpsServer}}"
 									],
-									"port": "8080",
+									"path": [
+										"api",
+										"register",
+										"teachers"
+									]
+								}
+							},
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "teacherexist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "fa",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"teacher@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{$HttpsServer}}/api/register/teachers",
+									"host": [
+										"{{$HttpsServer}}"
+									],
 									"path": [
 										"api",
 										"register",
@@ -99,7 +133,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n{\r\n  \"email\": \"student2@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+							"raw": "\r\n{\r\n  \"email\": \"stssud3434434ent2@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -107,12 +141,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/register/students",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/register/students",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"register",
@@ -120,7 +152,86 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Student_Signup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "fr",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n  \"email\": \"student2@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{$HttpsServer}}/api/register/students",
+									"host": [
+										"{{$HttpsServer}}"
+									],
+									"path": [
+										"api",
+										"register",
+										"students"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "existStudent",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "fr",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n  \"email\": \"student2@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{$HttpsServer}}/api/register/students",
+									"host": [
+										"{{$HttpsServer}}"
+									],
+									"path": [
+										"api",
+										"register",
+										"students"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "Login",
@@ -129,7 +240,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"student@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+							"raw": "{\r\n  \"username\": \"admin@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -137,12 +248,166 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/auth/login",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/auth/login",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"admin@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{$HttpsServer}}/api/auth/login",
+									"host": [
+										"{{$HttpsServer}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "teacher",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"teacher@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{$HttpsServer}}/api/auth/login",
+									"host": [
+										"{{$HttpsServer}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "student",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n  \"email\": \"student2@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{$HttpsServer}}/api/auth/login",
+									"host": [
+										"{{$HttpsServer}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "invalidemail",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"sssssss@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{$HttpsServer}}/api/auth/login",
+									"host": [
+										"{{$HttpsServer}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "student",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n  \"username\": \"stssud3434434ent2@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$HttpsServer}}/api/auth/login",
+							"host": [
+								"{{$HttpsServer}}"
+							],
 							"path": [
 								"api",
 								"auth",
@@ -165,7 +430,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3NDY3OTk0OTQsImlhdCI6MTc0Njc5NTg5NH0.7DP-QVfgqSKYzN3Uo5PIA3Ynso8Cj5IRCpzn2596MGM",
+									"value": "{{$AdminToken}}",
 									"type": "string"
 								}
 							]
@@ -188,12 +453,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/courses",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/courses",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -201,7 +464,123 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "c",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "fa",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"C#\",\r\n  \"description\": \"this is bootcamp\",\r\n  \"startDate\": \"2022-01-11\",\r\n  \"endDate\": \"2023-12-12\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{$HttpsServer}}]/api/v1/courses",
+									"host": [
+										"{{$HttpsServer}}]"
+									],
+									"path": [
+										"api",
+										"v1",
+										"courses"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Add course",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "fa",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"java\",\r\n  \"description\": \"this is bootcamp\",\r\n  \"startDate\": \"2022-01-11\",\r\n  \"endDate\": \"2023-12-12\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{$HttpsServer}}/api/v1/courses",
+									"host": [
+										"{{$HttpsServer}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"courses"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "occurs exception",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "fa",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"C#\",\r\n  \"description\": \"this is bootcamp\",\r\n  \"startDate\": \"2022-01-11\",\r\n  \"endDate\": \"2011-12-12\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{$HttpsServer}}/api/v1/courses",
+									"host": [
+										"{{$HttpsServer}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"courses"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "Assign role",
@@ -211,7 +590,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3NDY4MjM5OTIsImlhdCI6MTc0NjgyMDM5Mn0._FX7XpiwiS-DiKIlE4V9FmjGhMPP5LVw7UBJcgYkWB8",
+									"value": "{{$AdminToken}}",
 									"type": "string"
 								}
 							]
@@ -226,7 +605,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"userId\": 7,\r\n  \"courseId\": 2\r\n}",
+							"raw": "{\r\n  \"userId\": 4,\r\n  \"courseId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -234,12 +613,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/courses/assign-role",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/courses/assign-role",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -258,7 +635,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3NDY3OTk0OTQsImlhdCI6MTc0Njc5NTg5NH0.7DP-QVfgqSKYzN3Uo5PIA3Ynso8Cj5IRCpzn2596MGM",
+									"value": "{{$AdminToken}}",
 									"type": "string"
 								}
 							]
@@ -281,17 +658,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/courses/6",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/courses/2",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
 								"courses",
-								"6"
+								"2"
 							]
 						}
 					},
@@ -305,7 +680,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3NDY3OTk0OTQsImlhdCI6MTc0Njc5NTg5NH0.7DP-QVfgqSKYzN3Uo5PIA3Ynso8Cj5IRCpzn2596MGM",
+									"value": "{{$AdminToken}}",
 									"type": "string"
 								}
 							]
@@ -313,16 +688,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/courses/6",
+							"raw": "{{$HttpsServer}}/api/v1/courses/2",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
 								"courses",
-								"6"
+								"2"
 							]
 						}
 					},
@@ -336,7 +710,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3NDY4MjUxMTAsImlhdCI6MTc0NjgyMTUxMH0.ZQrhZCeZsXlyuwfhVS8I-vpONvtJ6chmLADZD0ELSUw",
+									"value": "{{$AdminToken}}",
 									"type": "string"
 								}
 							]
@@ -344,19 +718,17 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/courses/7/course/2",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/courses/4/course/1",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
 								"courses",
-								"7",
+								"4",
 								"course",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -370,7 +742,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3NDY4MjUxMTAsImlhdCI6MTc0NjgyMTUxMH0.ZQrhZCeZsXlyuwfhVS8I-vpONvtJ6chmLADZD0ELSUw",
+									"value": "{{$AdminToken}}",
 									"type": "string"
 								}
 							]
@@ -378,18 +750,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/courses/students/2",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/courses/students/1",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
 								"courses",
 								"students",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -403,7 +773,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQGdtYWlsLmNvbSIsInJvbGUiOiJURUFDSEVSIiwiZXhwIjoxNzQ2ODI0MzM1LCJpYXQiOjE3NDY4MjA3MzV9.Y3o37BCnGW7MrWfVsFJ3qiHGXhnOwQ946bOCjcrQ7eQ",
+									"value": "{{$StudentToken}}",
 									"type": "string"
 								}
 							]
@@ -411,12 +781,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/user/courses",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/user/courses",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -465,7 +833,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQGdtYWlsLmNvbSIsInJvbGUiOiJURUFDSEVSIiwiZXhwIjoxNzQ2ODI3MTM0LCJpYXQiOjE3NDY4MjM1MzR9.F7DFRNo1ME7wm1CWGw3LTEjJhI34KCPPuylNzWqPicU",
+									"value": "{{$TeacherToken}}",
 									"type": "string"
 								}
 							]
@@ -482,12 +850,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/exam",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -522,12 +888,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/4",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/exam/4",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -546,7 +910,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQGdtYWlsLmNvbSIsInJvbGUiOiJURUFDSEVSIiwiZXhwIjoxNzQ2ODMxNjMxLCJpYXQiOjE3NDY4MjgwMzF9.TXtQKnbomdtvdDHeisUf0vYBtwC4msPdhKw2fdpiOec",
+									"value": "{{$TeacherToken}}",
 									"type": "string"
 								}
 							]
@@ -554,14 +918,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/4",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/v1/exam/4",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"v1",
 								"exam",
 								"4"
@@ -578,7 +939,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQGdtYWlsLmNvbSIsInJvbGUiOiJURUFDSEVSIiwiZXhwIjoxNzQ2ODMxNjMxLCJpYXQiOjE3NDY4MjgwMzF9.TXtQKnbomdtvdDHeisUf0vYBtwC4msPdhKw2fdpiOec",
+									"value": "{{$TeacherToken}}",
 									"type": "string"
 								}
 							]
@@ -586,17 +947,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/2/all",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/exam/1/all",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
 								"exam",
-								"2",
+								"1",
 								"all"
 							]
 						}
@@ -611,7 +970,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsInJvbGUiOiJTVFVERU5UIiwiZXhwIjoxNzQ2ODM4MzU3LCJpYXQiOjE3NDY4MzQ3NTd9.jamrLYSLJqnNwRk4xk9-Sm2WEf4R7AIM0ObuhkJpppY",
+									"value": "{{$StudentToken}}",
 									"type": "string"
 								}
 							]
@@ -619,17 +978,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/5/start",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/exam/1/start",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
 								"exam",
-								"5",
+								"1",
 								"start"
 							]
 						}
@@ -644,7 +1001,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsInJvbGUiOiJTVFVERU5UIiwiZXhwIjoxNzQ2ODM4MzU3LCJpYXQiOjE3NDY4MzQ3NTd9.jamrLYSLJqnNwRk4xk9-Sm2WEf4R7AIM0ObuhkJpppY",
+									"value": "{{$StudentToken}}",
 									"type": "string"
 								}
 							]
@@ -652,12 +1009,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/exam-sessions/1/current",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/exam/exam-sessions/1/current",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -678,7 +1033,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsInJvbGUiOiJTVFVERU5UIiwiZXhwIjoxNzQ2ODM4MzU3LCJpYXQiOjE3NDY4MzQ3NTd9.jamrLYSLJqnNwRk4xk9-Sm2WEf4R7AIM0ObuhkJpppY",
+									"value": "{{$StudentToken}}",
 									"type": "string"
 								}
 							]
@@ -686,12 +1041,10 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/exam-sessions/1/navigate?direction=next",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/exam/exam-sessions/1/navigate?direction=next",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -718,7 +1071,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsInJvbGUiOiJTVFVERU5UIiwiZXhwIjoxNzQ2ODM4MzU3LCJpYXQiOjE3NDY4MzQ3NTd9.jamrLYSLJqnNwRk4xk9-Sm2WEf4R7AIM0ObuhkJpppY",
+									"value": "{{$StudentToken}}",
 									"type": "string"
 								}
 							]
@@ -726,12 +1079,10 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/exam-sessions/1/navigate?direction=previous",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/exam/exam-sessions/1/navigate?direction=previous",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -758,7 +1109,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsInJvbGUiOiJTVFVERU5UIiwiZXhwIjoxNzQ2ODM4MzU3LCJpYXQiOjE3NDY4MzQ3NTd9.jamrLYSLJqnNwRk4xk9-Sm2WEf4R7AIM0ObuhkJpppY",
+									"value": "{{$StudentToken}}",
 									"type": "string"
 								}
 							]
@@ -767,7 +1118,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"questionId\": 6,\r\n  \"content\": \"this \"\r\n}\r\n",
+							"raw": "{\r\n  \"questionId\": 1,\r\n  \"content\": \"this \"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -775,12 +1126,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/exam-sessions/1/answers",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/exam/exam-sessions/1/answers",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -801,7 +1150,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsInJvbGUiOiJTVFVERU5UIiwiZXhwIjoxNzQ2ODM4MzU3LCJpYXQiOjE3NDY4MzQ3NTd9.jamrLYSLJqnNwRk4xk9-Sm2WEf4R7AIM0ObuhkJpppY",
+									"value": "{{$StudentToken}}",
 									"type": "string"
 								}
 							]
@@ -809,18 +1158,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/exam-session/5/all/answers",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/exam/exam-session/1/all/answers",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
 								"exam",
 								"exam-session",
-								"5",
+								"1",
 								"all",
 								"answers"
 							]
@@ -836,7 +1183,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsInJvbGUiOiJTVFVERU5UIiwiZXhwIjoxNzQ2ODM4MzU3LCJpYXQiOjE3NDY4MzQ3NTd9.jamrLYSLJqnNwRk4xk9-Sm2WEf4R7AIM0ObuhkJpppY",
+									"value": "{{$StudentToken}}",
 									"type": "string"
 								}
 							]
@@ -844,12 +1191,10 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/exam-sessions/1/submit",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/exam/exam-sessions/1/submit",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -870,7 +1215,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsInJvbGUiOiJTVFVERU5UIiwiZXhwIjoxNzQ2ODM4MzU3LCJpYXQiOjE3NDY4MzQ3NTd9.jamrLYSLJqnNwRk4xk9-Sm2WEf4R7AIM0ObuhkJpppY",
+									"value": "{{$StudentToken}}",
 									"type": "string"
 								}
 							]
@@ -878,24 +1223,22 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/detail/5/report?studentId=5",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/exam/detail/1/report?studentId=1",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
 								"exam",
 								"detail",
-								"5",
+								"1",
 								"report"
 							],
 							"query": [
 								{
 									"key": "studentId",
-									"value": "5"
+									"value": "1"
 								}
 							]
 						}
@@ -910,7 +1253,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsInJvbGUiOiJTVFVERU5UIiwiZXhwIjoxNzQ2ODM4MzU3LCJpYXQiOjE3NDY4MzQ3NTd9.jamrLYSLJqnNwRk4xk9-Sm2WEf4R7AIM0ObuhkJpppY",
+									"value": "{{$StudentToken}}",
 									"type": "string"
 								}
 							]
@@ -918,14 +1261,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/continue/1",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}api/v1/exam/continue/1",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}api"
 							],
-							"port": "8080",
 							"path": [
-								"api",
 								"v1",
 								"exam",
 								"continue",
@@ -936,14 +1276,14 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "report",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsInJvbGUiOiJTVFVERU5UIiwiZXhwIjoxNzQ2ODM4MzU3LCJpYXQiOjE3NDY4MzQ3NTd9.jamrLYSLJqnNwRk4xk9-Sm2WEf4R7AIM0ObuhkJpppY",
+									"value": "{{$StudentToken}}",
 									"type": "string"
 								}
 							]
@@ -951,12 +1291,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/exam/5/report",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/exam/5/report",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -1033,12 +1371,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/questions",
-									"protocol": "http",
+									"raw": "{{$HttpsServer}}/api/v1/questions",
 									"host": [
-										"localhost"
+										"{{$HttpsServer}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -1046,10 +1382,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "Essay Question",
@@ -1072,12 +1408,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/questions",
-									"protocol": "http",
+									"raw": "{{$HttpsServer}}/api/v1/questions",
 									"host": [
-										"localhost"
+										"{{$HttpsServer}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -1085,10 +1419,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						},
 						{
 							"name": "MultipleChoice",
@@ -1111,12 +1445,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/questions",
-									"protocol": "http",
+									"raw": "{{$HttpsServer}}/api/v1/questions",
 									"host": [
-										"localhost"
+										"{{$HttpsServer}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -1124,10 +1456,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						}
 					]
 				},
@@ -1139,7 +1471,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQGdtYWlsLmNvbSIsInJvbGUiOiJURUFDSEVSIiwiZXhwIjoxNzQ2ODMxNjMxLCJpYXQiOjE3NDY4MjgwMzF9.TXtQKnbomdtvdDHeisUf0vYBtwC4msPdhKw2fdpiOec",
+									"value": "{{$TeacherToken}}",
 									"type": "string"
 								}
 							]
@@ -1148,7 +1480,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"courseId\": 2,\r\n  \"examId\": 5,\r\n  \"questionId\": 16,\r\n  \"score\": 10\r\n}",
+							"raw": "{\r\n \"courseId\": 1,\r\n  \"examId\": 1,\r\n  \"questionId\": 7,\r\n  \"score\": 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1156,12 +1488,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/questions/add/exam",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/questions/add/exam",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -1181,7 +1511,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQGdtYWlsLmNvbSIsInJvbGUiOiJURUFDSEVSIiwiZXhwIjoxNzQ2ODMxNjMxLCJpYXQiOjE3NDY4MjgwMzF9.TXtQKnbomdtvdDHeisUf0vYBtwC4msPdhKw2fdpiOec",
+									"value": "{{$TeacherToken}}",
 									"type": "string"
 								}
 							]
@@ -1189,17 +1519,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/questions/13",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/questions/11",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
 								"questions",
-								"13"
+								"11"
 							]
 						}
 					},
@@ -1213,7 +1541,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQGdtYWlsLmNvbSIsInJvbGUiOiJURUFDSEVSIiwiZXhwIjoxNzQ2ODMxNjMxLCJpYXQiOjE3NDY4MjgwMzF9.TXtQKnbomdtvdDHeisUf0vYBtwC4msPdhKw2fdpiOec",
+									"value": "{{$TeacherToken}}",
 									"type": "string"
 								}
 							]
@@ -1221,19 +1549,17 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/questions/13/exam/5",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/questions/4/exam/1",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
 								"questions",
-								"13",
+								"4",
 								"exam",
-								"5"
+								"1"
 							]
 						}
 					},
@@ -1247,7 +1573,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQGdtYWlsLmNvbSIsInJvbGUiOiJURUFDSEVSIiwiZXhwIjoxNzQ2ODMxNjMxLCJpYXQiOjE3NDY4MjgwMzF9.TXtQKnbomdtvdDHeisUf0vYBtwC4msPdhKw2fdpiOec",
+									"value": "{{$TeacherToken}}",
 									"type": "string"
 								}
 							]
@@ -1255,17 +1581,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/questions/5/exam",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/questions/1/exam",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
 								"questions",
-								"5",
+								"1",
 								"exam"
 							]
 						}
@@ -1280,7 +1604,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQGdtYWlsLmNvbSIsInJvbGUiOiJURUFDSEVSIiwiZXhwIjoxNzQ2ODMxNjMxLCJpYXQiOjE3NDY4MjgwMzF9.TXtQKnbomdtvdDHeisUf0vYBtwC4msPdhKw2fdpiOec",
+									"value": "{{$TeacherToken}}",
 									"type": "string"
 								}
 							]
@@ -1288,12 +1612,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/questions/teacher",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/questions/teacher",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -1305,14 +1627,14 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/api/v1/questions",
+					"name": "ESSAY Question",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQGdtYWlsLmNvbSIsInJvbGUiOiJURUFDSEVSIiwiZXhwIjoxNzQ2ODMxNjMxLCJpYXQiOjE3NDY4MjgwMzF9.TXtQKnbomdtvdDHeisUf0vYBtwC4msPdhKw2fdpiOec",
+									"value": "{{$TeacherToken}}",
 									"type": "string"
 								}
 							]
@@ -1327,7 +1649,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"type\": \"ESSAY\",\r\n  \"dtype\": \"ESSAY\",\r\n  \"title\": \"this is edit Explain OOP concepts\",\r\n  \"description\": \"asdkhjfd21312wkdshflkhalhlkhlkasdhflaksdhflaksdjhasdlkfjahsdf\",\r\n  \"identifier\": \"Q12345111112s\",\r\n  \"defaultScore\": 10.0,\r\n  \"level\": \"SIMPLE\",\r\n  \"category\": \"Fizik\",\r\n  \"courseId\": 2,\r\n  \"answer\": \"OOP is a programming paradigm based on objects...\",\r\n  \"maxLength\": 500\r\n}\r\n",
+							"raw": "{\r\n  \"type\": \"ESSAY\",\r\n  \"dtype\": \"ESSAY\",\r\n  \"title\": \"this is edit Explain OOP concepts\",\r\n  \"description\": \"asdkhjfd21312wkdshflkhalhlkhlkasdhflaksdhflaksdjhasdlkfjahsdf\",\r\n  \"identifier\": \"Q12345111112s\",\r\n  \"defaultScore\": 10.0,\r\n  \"level\": \"SIMPLE\",\r\n  \"category\": \"Fizik\",\r\n  \"courseId\": 1,\r\n  \"answer\": \"OOP is a programming paradigm based on objects...\",\r\n  \"maxLength\": 500\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1335,12 +1657,55 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/questions",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/questions",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"questions"
+							]
+						},
+						"description": "## API Endpoint: Create Question\n\n### Method\n\n`POST`\n\n### URL\n\n`{{$HttpsServer}}/api/v1/questions`\n\n### Description\n\nThis endpoint allows users to create a new question in the system. The request must include a JSON payload containing various parameters that define the characteristics of the question being created.\n\n### Request Parameters\n\nThe request body should be in JSON format and include the following parameters:\n\n- **type** (string): Specifies the type of the question (e.g., \"ESSAY\").\n    \n- **dtype** (string): Defines the data type of the question (e.g., \"ESSAY\").\n    \n- **title** (string): The title of the question.\n    \n- **description** (string): A brief description of the question.\n    \n- **identifier** (string): A unique identifier for the question.\n    \n- **defaultScore** (integer): The default score assigned to the question.\n    \n- **level** (string): The difficulty level of the question (e.g., \"SIMPLE\").\n    \n- **category** (string): The category under which the question falls (e.g., \"Fizik\").\n    \n- **courseId** (integer): The ID of the course related to the question.\n    \n- **answer** (string): The answer to the question.\n    \n- **maxLength** (integer): The maximum length allowed for the question.\n    \n\n### Expected Response\n\nUpon a successful request, the API will return a response with the following format:\n\n- **Status Code**: `200 OK`\n    \n- **Content-Type**: `application/json`\n    \n- **Response Body**:\n    \n    - **success** (boolean): Indicates whether the request was successful.\n        \n    - **message** (string): A message providing additional information (may be empty).\n        \n\nThis endpoint is essential for managing questions within the application, allowing for the creation of various types of questions with specific attributes."
+					},
+					"response": []
+				},
+				{
+					"name": "TRUE_FALSE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{$TeacherToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"TRUE_FALSE\",\r\n  \"dtype\": \"TRUE_FALSE\",\r\n  \"title\": \"edit.\",\r\n  \"description\": \"Is this statement true or false?\",\r\n  \"identifier\": \"Q1011122222121211201111s31ss\",\r\n  \"defaultScore\": 2.0,\r\n  \"level\": \"SIMPLE\",\r\n  \"category\": \"Fizik\",\r\n  \"courseId\": 1,\r\n  \"isCorrect\": false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$HttpsServer}}/api/v1/questions",
+							"host": [
+								"{{$HttpsServer}}"
+							],
 							"path": [
 								"api",
 								"v1",
@@ -1351,14 +1716,14 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/api/v1/questions",
+					"name": "MULTIPLE_CHOICE",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWFjaGVyQGdtYWlsLmNvbSIsInJvbGUiOiJURUFDSEVSIiwiZXhwIjoxNzQ2ODMxNjMxLCJpYXQiOjE3NDY4MjgwMzF9.TXtQKnbomdtvdDHeisUf0vYBtwC4msPdhKw2fdpiOec",
+									"value": "{{$TeacherToken}}",
 									"type": "string"
 								}
 							]
@@ -1373,7 +1738,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"type\": \"TRUE_FALSE\",\r\n  \"dtype\": \"TRUE_FALSE\",\r\n  \"title\": \"edit.\",\r\n  \"description\": \"Is this statement true or false?\",\r\n  \"identifier\": \"Q1011122222121211201111s31ss\",\r\n  \"defaultScore\": 2.0,\r\n  \"level\": \"SIMPLE\",\r\n  \"category\": \"Fizik\",\r\n  \"courseId\": 2,\r\n  \"isCorrect\": false\r\n}\r\n",
+							"raw": "\r\n{\r\n  \"type\": \"MULTIPLE_CHOICE\",\r\n  \"dtype\": \"MULTIPLE_CHOICE\",\r\n  \"title\": \"What is JAVA?\",\r\n  \"description\": \"Select the correct definition of Java.\",\r\n  \"defaultScore\": 5.0,\r\n  \"level\": \"MEDIUM\",\r\n  \"category\": \"Math\",\r\n  \"courseId\": 1,\r\n  \"options\": [\r\n    { \"text\": \"A programming language\", \"isCorrect\": true },\r\n    { \"text\": \"A coffee brand\", \"isCorrect\": false },\r\n    { \"text\": \"A web browser\", \"isCorrect\": false },\r\n    { \"text\": \"A web browser\", \"isCorrect\": false },\r\n    { \"text\": \"A web browser\", \"isCorrect\": false },\r\n    { \"text\": \"A web browser\", \"isCorrect\": false },\r\n    { \"text\": \"A web browser\", \"isCorrect\": false },\r\n    { \"text\": \"A web browser\", \"isCorrect\": false }\r\n  ],\r\n  \"shuffled\": true\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1381,12 +1746,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/questions",
-							"protocol": "http",
+							"raw": "{{$HttpsServer}}/api/v1/questions",
 							"host": [
-								"localhost"
+								"{{$HttpsServer}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
