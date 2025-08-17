@@ -3,11 +3,16 @@ package org.learnova.lms.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.domain.user.Role;
 import org.learnova.lms.dto.request.LoginDTO;
+import org.learnova.lms.exception.RoleNotFoundException;
+import org.learnova.lms.repository.course.CourseRepository;
+import org.learnova.lms.repository.role.RoleRepository;
 import org.learnova.lms.repository.user.UserRepository;
+import org.learnova.lms.util.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,26 +41,35 @@ class LoginControllerTest {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private CourseRepository courseRepository;
 
     private Faker faker = new Faker();
 
 
+    @BeforeEach
+    void setUp() {
+        roleRepository.deleteAll();
+    }
     @AfterEach
     void afterEach() {
         userRepository.deleteAll();
+        courseRepository.deleteAll();
     }
 
     @Test
     void login_Success() throws Exception {
-
         AppUser appUser = new AppUser();
         appUser.setUserName("email@email");
         appUser.setEmail("email@email");
-        appUser.setRole(new Role("ROLE_USER"));
+        appUser.setRole(new Role("TEACHER"));
         appUser.setPassword(passwordEncoder.encode("123456789"));
-        AppUser userSaved=userRepository.save(appUser);
+        AppUser userSaved = userRepository.save(appUser);
 
-        LoginDTO loginDTO = new LoginDTO(userSaved.getUserName(), "123456789");
+        LoginDTO loginDTO =
+                new LoginDTO(userSaved.getUserName(), "123456789");
 
         mockMvc.perform(
                 post("/api/auth/login")
@@ -66,7 +80,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void  login_Fail_UserNotFound() throws Exception {
+    void login_Fail_UserNotFound() throws Exception {
 
         LoginDTO loginDTO = new LoginDTO(faker.internet().emailAddress(), "123456789");
 
@@ -79,11 +93,10 @@ class LoginControllerTest {
     }
 
     @Test
-    void  login_Fail_BadCredentials() throws Exception {
+    void login_Fail_BadCredentials() throws Exception {
         AppUser appUser = new AppUser();
         appUser.setUserName("email@email");
         appUser.setEmail("email@email");
-        appUser.setRole(new Role("ROLE_USER"));
         appUser.setPassword(passwordEncoder.encode("correctpassword"));
         userRepository.save(appUser);
 

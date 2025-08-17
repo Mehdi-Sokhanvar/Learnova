@@ -1,5 +1,6 @@
 package org.learnova.lms.domain.user;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import org.learnova.lms.domain.course.Course;
@@ -11,7 +12,7 @@ import java.util.List;
 public class
 Teacher extends AppUser{
 
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.REMOVE)
     private List<Course> courseList;
 
 

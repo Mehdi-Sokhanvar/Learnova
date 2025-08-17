@@ -29,11 +29,12 @@ public class DataLoader implements CommandLineRunner {
         if (roleRepository.count() == 0) {
             roleRepository.save(new Role("STUDENT"));
             roleRepository.save(new Role("TEACHER"));
-            roleRepository.save(new Role("ADMIN"));
         }
 
 
-        AppUser use = new AppUser("admin@gmail.com", passwordEncoder.encode("123456789"), "admin@gmail.com", new Role("ADMIN"));
+        AppUser use = new AppUser("admin@gmail.com",
+                passwordEncoder.encode("123456789"),
+                "admin@gmail.com", new Role("ADMIN"));
         userRepository.save(use);
     }
 

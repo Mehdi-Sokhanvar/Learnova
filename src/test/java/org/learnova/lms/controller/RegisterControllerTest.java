@@ -6,6 +6,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.learnova.lms.domain.user.AppUser;
 import org.learnova.lms.dto.request.RegisterDTO;
+import org.learnova.lms.repository.course.CourseRepository;
+import org.learnova.lms.repository.role.RoleRepository;
 import org.learnova.lms.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -35,11 +37,17 @@ class RegisterControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+
+    @Autowired
+    private CourseRepository courseRepository;
+
     private Faker faker = new Faker();
+
 
     @AfterEach
     void afterEach() {
         userRepository.deleteAll();
+        courseRepository.deleteAll();
     }
 
     @Test

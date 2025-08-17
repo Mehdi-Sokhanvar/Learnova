@@ -10,6 +10,7 @@ import org.learnova.lms.domain.user.Student;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 public class ExamSession extends BaseEntity<Long> {
@@ -38,6 +39,21 @@ public class ExamSession extends BaseEntity<Long> {
 
     private Integer currentQuestion;
 
+    public ExamSession(Exam exam, Student student, Instant startTime, Instant endTime, ExamStatus status, Double totalScore, List<Long> questionOrder, List<StudentAnswer> studentAnswers, Integer currentQuestion) {
+        this.exam = exam;
+        this.student = student;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.status = status;
+        this.totalScore = totalScore;
+        this.questionOrder = questionOrder;
+        this.studentAnswers = studentAnswers;
+        this.currentQuestion = currentQuestion;
+    }
+
+    public ExamSession() {
+
+    }
 
     public Double getTotalScore() {
         return totalScore;

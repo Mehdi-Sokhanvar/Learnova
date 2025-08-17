@@ -35,18 +35,18 @@ public class QuestionController {
     }
 
 
-
+    @PreAuthorize("hasRole('TEACHER')")
     @PostMapping
     public ResponseEntity<ApiResponse> createQuestion(@RequestBody QuestionDTO dto, Principal principal, Locale locale) {
         CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
         AppUser teacher = userDetails.getUser();
         questionService.addQuestion(teacher, dto);
         String message = messageSource.getMessage("question.add.success", null, locale);
-        return ResponseEntity.ok(new ApiResponse(true, message));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse(true, message));
     }
 
-
-
+    @PreAuthorize("hasRole('TEACHER')")
     @PostMapping("/add/exam")
     public ResponseEntity<ApiResponse> addQuestionTOCourse(@RequestBody QuestionRequestDto dto, Principal principal, Locale locale) {
         CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
@@ -56,10 +56,9 @@ public class QuestionController {
         return ResponseEntity.ok(new ApiResponse(true, message));
     }
 
-
-
+    @PreAuthorize("hasRole('TEACHER')")
     @DeleteMapping("/{questionId}")
-    public ResponseEntity<ApiResponse> deleteQuestion(@PathVariable Long questionId, Principal principal, Locale locale) {
+    public ResponseEntity<ApiResponse> deleteQuestion(@PathVariable("questionId") Long questionId, Principal principal, Locale locale) {
         CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
         Teacher teacher = (Teacher) userDetails.getUser();
         questionService.deleteQuestion(teacher, questionId);
@@ -67,7 +66,7 @@ public class QuestionController {
         return ResponseEntity.ok(new ApiResponse(true, message));
     }
 
-
+    @PreAuthorize("hasRole('TEACHER')")
     @DeleteMapping("/{questionId}/exam/{examId}")
     public ResponseEntity<ApiResponse> deleteQuestionFromExam(@PathVariable Long questionId, @PathVariable Long examId, Principal principal, Locale locale) {
         CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
@@ -77,7 +76,7 @@ public class QuestionController {
         return ResponseEntity.ok(new ApiResponse(true, message));
     }
 
-
+    @PreAuthorize("hasRole('TEACHER')")
     @GetMapping("/{examId}/exam")
     public ResponseEntity<List<QuestionResponseDTO>> getExamQuestions(@PathVariable Long examId, Principal principal) {
         CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
@@ -85,8 +84,7 @@ public class QuestionController {
         return new ResponseEntity<>(questionService.findAllExamQuestions(teacher, examId), HttpStatus.OK);
     }
 
-
-
+    @PreAuthorize("hasRole('TEACHER')")
     @GetMapping("/teacher")
     public ResponseEntity<List<QuestionResponseDTO>> getTeacherQuestion(Principal principal) {
         CustomUserDetails userDetails = (CustomUserDetails) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();

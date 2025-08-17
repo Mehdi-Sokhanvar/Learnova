@@ -1,5 +1,6 @@
 package org.learnova.lms.domain.user;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -17,7 +18,7 @@ public class Role extends BaseEntity<Long> {
 
     private String description;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private List<AppUser> userList;
 
     public Role() {
@@ -38,6 +39,10 @@ public class Role extends BaseEntity<Long> {
 
 
     public Role(String name) {
+        this.name = name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 }
